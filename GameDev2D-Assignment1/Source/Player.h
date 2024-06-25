@@ -2,14 +2,18 @@
 
 #include <GameDev2D.h>
 #include "Bullet.h"
+//#include "Game.h"
 
 namespace GameDev2D
 {
+
+	class Game;
+
 	class Player
 	{
 	public:
-		Player();
-		~Player();
+		Player(Game* game);
+		//~Player();
 
 		void OnUpdate(float delta);
 		void OnRender(BatchRenderer& batchRenderer);
@@ -18,6 +22,7 @@ namespace GameDev2D
 
 
 	private:
+		Game* m_Game;
 		Vector2 m_Velocity;
 		Vector2 m_Position;
 		float m_Angle;

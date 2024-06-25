@@ -15,6 +15,7 @@ namespace GameDev2D
         Vector2 GetPosition();
         bool IsActive();
         void Activate(const Vector2& position, const Vector2& velocity);
+
     private:
         Vector2 m_Position;
         Vector2 m_Velocity;

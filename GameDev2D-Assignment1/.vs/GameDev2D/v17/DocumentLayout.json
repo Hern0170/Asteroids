@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Bullet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Bullet.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -11,16 +15,12 @@
       "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Bullet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Asteroid.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Asteroid.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Game.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Asteroid.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Asteroid.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Game.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -35,12 +35,20 @@
       "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Constants.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Asteroid.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Asteroid.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Asteroid.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Asteroid.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Collision.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Collision.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Player.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Collision.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}|GameDev2D.vcxproj|solutionrelative:Source\\Collision.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,30 +58,56 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 11,
+              "Title": "Collision.cpp",
+              "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Collision.cpp",
+              "RelativeDocumentMoniker": "Source\\Collision.cpp",
+              "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Collision.cpp",
+              "RelativeToolTip": "Source\\Collision.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-25T20:50:32.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Collision.h",
+              "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Collision.h",
+              "RelativeDocumentMoniker": "Source\\Collision.h",
+              "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Collision.h",
+              "RelativeToolTip": "Source\\Collision.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-25T20:49:57.505Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Bullet.h",
               "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Bullet.h",
               "RelativeDocumentMoniker": "Source\\Bullet.h",
               "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Bullet.h",
               "RelativeToolTip": "Source\\Bullet.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABYAAAAVAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-06-24T23:18:55.837Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Bullet.cpp",
               "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Bullet.cpp",
               "RelativeDocumentMoniker": "Source\\Bullet.cpp",
               "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Bullet.cpp",
               "RelativeToolTip": "Source\\Bullet.cpp",
-              "ViewState": "AQIAACsAAAAAAAAAAAAhwEgAAAAaAAAA",
+              "ViewState": "AQIAAD0AAAAAAAAAAAD4v04AAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-06-24T23:18:49.442Z",
               "EditorCaption": ""
@@ -86,27 +120,27 @@
               "RelativeDocumentMoniker": "Source\\Player.h",
               "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Player.h",
               "RelativeToolTip": "Source\\Player.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAATAAAA",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAACMAAAAjAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-06-24T20:01:34.177Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
               "Title": "Player.cpp",
               "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Player.cpp",
               "RelativeDocumentMoniker": "Source\\Player.cpp",
               "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Player.cpp",
               "RelativeToolTip": "Source\\Player.cpp",
-              "ViewState": "AQIAAKUAAAAAAAAAAAAAANwAAAAFAAAA",
+              "ViewState": "AQIAAFEAAAAAAAAAAAD4vzcAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-06-24T20:01:33.397Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\main.cpp",
               "RelativeDocumentMoniker": "Source\\main.cpp",
@@ -125,20 +159,20 @@
               "RelativeDocumentMoniker": "Source\\Game.h",
               "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Game.h",
               "RelativeToolTip": "Source\\Game.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-06-24T20:01:32.216Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Game.cpp",
               "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Game.cpp",
               "RelativeDocumentMoniker": "Source\\Game.cpp",
               "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Game.cpp",
               "RelativeToolTip": "Source\\Game.cpp",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAAAAEAAAAAAAAA",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAAAHQAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-06-24T20:01:31.425Z",
               "EditorCaption": ""
@@ -158,27 +192,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "Asteroid.h",
               "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Asteroid.h",
               "RelativeDocumentMoniker": "Source\\Asteroid.h",
               "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Asteroid.h",
               "RelativeToolTip": "Source\\Asteroid.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-06-24T20:01:30.137Z"
+              "WhenOpened": "2024-06-24T20:01:30.137Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "Asteroid.cpp",
               "DocumentMoniker": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Asteroid.cpp",
               "RelativeDocumentMoniker": "Source\\Asteroid.cpp",
               "ToolTip": "C:\\Users\\Alex\\Documents\\AC\\Grap\\A2\\Asteroid\\GameDev2D-Assignment1\\Source\\Asteroid.cpp",
               "RelativeToolTip": "Source\\Asteroid.cpp",
-              "ViewState": "AQIAADgAAAAAAAAAAAAIwFEAAAAtAAAA",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAqwGEAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-06-24T20:01:29.316Z"
+              "WhenOpened": "2024-06-24T20:01:29.316Z",
+              "EditorCaption": ""
             }
           ]
         }

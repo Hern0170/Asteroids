@@ -12,6 +12,12 @@ namespace GameDev2D
 		void OnUpdate(float delta);
 		void OnRender(BatchRenderer& batchRenderer);
 
+		float GetMaxRadius() const;
+		Vector2 GetPosition() const;
+
+		bool IsActive() const;
+		void SetIsActiveFalse();
+
 	private:
 		Vector2 m_Velocity;
 		Vector2 m_Position;
@@ -19,5 +25,7 @@ namespace GameDev2D
 		float m_Angle;
 		float m_MaxRadius;
 		std::vector<Vector2> m_Shape;
+		bool m_IsActive;
+
 	};
 }

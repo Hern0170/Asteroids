@@ -2,6 +2,7 @@
 
 #include <GameDev2D.h>
 #include "Bullet.h"
+
 //#include "Game.h"
 
 namespace GameDev2D
@@ -19,7 +20,8 @@ namespace GameDev2D
 		void OnRender(BatchRenderer& batchRenderer);
 		void OnKeyEvent(KeyCode keyCode, KeyState keyState);
 		void Shoot();
-
+		float GetRadius() const;
+		Vector2 GetPosition() const;
 
 	private:
 		Game* m_Game;
@@ -27,11 +29,11 @@ namespace GameDev2D
 		Vector2 m_Position;
 		float m_Angle;
 		Vector2 m_Controls;
+		float m_Radius;
 
 		std::vector<Vector2> m_Shape;
 		std::vector<Vector2> m_Flame;
-		std::vector<Bullet*> m_Bullets;
-		Bullet* GetBulletFromPool();
+		//std::vector<Bullet*> m_Bullets;
 
 
 		float m_FlameTimer; // Temporizador para cambiar el color de la flama

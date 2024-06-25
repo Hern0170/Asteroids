@@ -50,6 +50,22 @@ namespace GameDev2D
 		{
 			m_Bullet[i]->OnUpdate(delta);
 		}
+
+		for (Asteroid& asteroid : m_Asteroids) {
+			if (CheckCollision(m_Player, &asteroid)) {
+				Player_AsteroidCollision(m_Player, asteroid);
+			}
+		}
+
+
+		for (auto& bullet : m_Bullet) {
+			if (!bullet->IsActive()) continue;
+			for (auto& asteroid : m_Asteroids) {
+				if (CheckCollision(bullet, &asteroid)) {
+					Bullet_AsteroidCollision(bullet, asteroid);
+				}
+			}
+		}
 	}
 
 	void Game::OnRender(BatchRenderer& batchRenderer)
@@ -77,6 +93,37 @@ namespace GameDev2D
 			bullet->Activate(position, velocity);
 		}
 	}
+
+	bool Game::CheckCollision(const Player* player, const Asteroid* asteroid)
+	{
+		Vector2 diff = player->GetPosition() - asteroid->GetPosition();
+		float distanceSquared = diff.LengthSquared();
+		float radiiSum = player->GetRadius() + asteroid->GetMaxRadius();
+		return distanceSquared <= (radiiSum * radiiSum);
+	}
+
+	bool Game::CheckCollision(const Bullet* bullet, const Asteroid* asteroid)
+	{
+		if (!bullet->IsActive() || !asteroid->IsActive()) return false; 
+
+		Vector2 diff = bullet->GetPosition() - asteroid->GetPosition();
+		float distanceSquared = diff.LengthSquared();
+		float radiiSum = bullet->GetRadius() + asteroid->GetMaxRadius();
+		return distanceSquared <= (radiiSum * radiiSum);
+	}
+
+	void Game::Player_AsteroidCollision(Player* Player, Asteroid& asteroid)
+	{
+		exit(0);
+	}
+
+	void Game::Bullet_AsteroidCollision(Bullet* bullet, Asteroid& asteroid)
+	{
+		asteroid.SetIsActiveFalse();
+		bullet->SetIsActiveFalse();
+	}
+
+	
 
 	Bullet* Game::GetBulletFromPool()
 	{

@@ -10,6 +10,7 @@ namespace GameDev2D
 		m_AngularVelocity(0.0f),
 		m_Angle(0.0f),
 		m_MaxRadius(0.0f),
+		m_IsActive(true),
 		m_Shape{}
 	{
 		// Create the asteroid shape.
@@ -87,6 +88,25 @@ namespace GameDev2D
 
 	void Asteroid::OnRender(BatchRenderer& batchRenderer)
 	{
-		batchRenderer.RenderLineStrip( m_Shape, ASTEROID_COLOR, 2, m_Position, m_Angle );
+		if (m_IsActive) {
+			batchRenderer.RenderLineStrip(m_Shape, ASTEROID_COLOR, 2, m_Position, m_Angle);
+
+		}
+	}
+	float Asteroid::GetMaxRadius() const
+	{
+		return m_MaxRadius;
+	}
+	Vector2 Asteroid::GetPosition() const
+	{
+		return m_Position;
+	}
+	bool Asteroid::IsActive() const
+	{
+		return m_IsActive;
+	}
+	void Asteroid::SetIsActiveFalse()
+	{
+		m_IsActive = false;
 	}
 }

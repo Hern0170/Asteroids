@@ -25,6 +25,13 @@ namespace GameDev2D
         if (m_Active) {
             this->m_Position += m_Velocity * delta;
 
+            m_BulletTimer += delta;
+            if (m_BulletTimer >= BULLET_TIME_ACTIVE) {
+                m_Active = false;
+                m_BulletTimer = 0.0f;
+            }
+
+
             if (m_Position.x < 0)
             {
                 m_Position.x += GameDev2D::GetScreenWidth();
@@ -44,20 +51,21 @@ namespace GameDev2D
             {
                 m_Position.y -= GameDev2D::GetScreenHeight();
             }
-            m_BulletTimer += delta;
+            
 
-            if (m_BulletTimer >= BULLET_TIME_ACTIVE) {
-                m_Active = false; 
-                m_BulletTimer = 0.0f;
-            }
+
         }
     }
 
     void Bullet::OnRender(BatchRenderer& batchRenderer)
     {
-        batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius + BULLET_RADIUS_INC, ColorList::Blue);
+        if (m_Active)
+        {
+            batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius + BULLET_RADIUS_INC, ColorList::Blue);
 
-        batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius, ColorList::LightBlue);
+            batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius, ColorList::LightBlue);
+        }
+
     }
 
     Vector2 Bullet::GetPosition()

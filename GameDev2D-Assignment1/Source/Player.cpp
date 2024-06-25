@@ -1,10 +1,11 @@
 ﻿#include "Player.h"
 #include "Constants.h"
-
+#include "Game.h"
 
 namespace GameDev2D
 {
-	Player::Player() :
+	Player::Player(Game* game) :
+		m_Game(game),
 		m_Velocity(Vector2::Zero),
 		m_Position(Vector2(GetScreenWidth()* PLAYER_SPAWN_POSITION_X_PCT, GetScreenHeight()* PLAYER_SPAWN_POSITION_Y_PCT)),
 		m_Angle(0.0f),
@@ -49,12 +50,12 @@ namespace GameDev2D
 		}
 	}
 
-	Player::~Player()
-	{
-		for (auto* bullet : m_Bullets) {
-			delete bullet;
-		}
-	}
+	//Player::~Player()
+	//{
+	//	for (auto* bullet : m_Bullets) {
+	//		delete bullet;
+	//	}
+	//}
 
 	void Player::OnUpdate(float delta)
 	{
@@ -112,17 +113,11 @@ namespace GameDev2D
 			m_FlameTimer = 0.0f; 
 		}
 
-
-		//for (bullet& bullet : m_bullets)
-		//{
-		//	bullet.onupdate(delta);
+		//for (auto* bullet : m_Bullets) {
+		//	if (bullet->IsActive()) {
+		//		bullet->OnUpdate(delta);
+		//	}
 		//}
-
-		for (auto* bullet : m_Bullets) {
-			if (bullet->IsActive()) {
-				bullet->OnUpdate(delta);
-			}
-		}
 	
 	}
 
@@ -135,16 +130,13 @@ namespace GameDev2D
 		}
 		batchRenderer.RenderLineStrip( m_Shape, PLAYER_COLOR, 2, m_Position, m_Angle );
 
-		/*for (Bullet& bullet : m_Bullets)
-		{
-			bullet.OnRender(batchRenderer);
-		}*/
 
-		for (Bullet* bullet : m_Bullets) {
+
+		/*for (Bullet* bullet : m_Bullets) {
 			if (bullet->IsActive()) {
 				bullet->OnRender(batchRenderer);
 			}
-		}
+		}*/
 	}
 
 	void Player::OnKeyEvent(KeyCode keyCode, KeyState keyState)
@@ -154,6 +146,7 @@ namespace GameDev2D
 			if (keyCode == KeyCode::Space)
 			{
 				Shoot();
+
 			}
 			if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
 			{
@@ -192,6 +185,7 @@ namespace GameDev2D
 		float angleRadians = Math::DegreesToRadians(m_Angle);
 		float angleOffset = 0.01f; 
 		float magnitude = 8.0f;
+		float radians = 0.0f;
 
 		Vector2 direction;
 		Vector2 position;
@@ -200,7 +194,7 @@ namespace GameDev2D
 		{
 			direction = Vector2(cos(angleRadians - angleOffset), sin(angleRadians - angleOffset));
 
-			float radians = angleRadians + M_PI_2; // Half pi or 90 degrees
+			radians = angleRadians + M_PI_2; // Half pi or 90 degrees
 			Vector2 leftEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + leftEdge;
 		}
@@ -208,29 +202,23 @@ namespace GameDev2D
 		{
 			direction = Vector2(cos(angleRadians + angleOffset), sin(angleRadians + angleOffset));
 
-			float radians = angleRadians - M_PI_2; // Half pi or 90 degrees
+			radians = angleRadians - M_PI_2; // Half pi or 90 degrees
 			Vector2 rightEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + rightEdge;
 		}
 
 		Vector2 velocity = direction * 500.0f; // Velocidad de la bala
 
-		/*Bullet newBullet(position, velocity);
-		m_Bullets.push_back(newBullet);*/
-
-		Bullet* bullet = GetBulletFromPool();
-		if (bullet != nullptr) {
-			bullet->Activate(position, velocity);
-		}
+		m_Game->SpawnBullet(position, velocity);
 	}
 
-	Bullet* Player::GetBulletFromPool()
-	{
-		for (auto* bullet : m_Bullets) {
-			if (!bullet->IsActive()) {
-				return bullet;
-			}
-		}
-		return nullptr;
-	}
+	//Bullet* Player::GetBulletFromPool()
+	//{
+	//	for (auto* bullet : m_Bullets) {
+	//		if (!bullet->IsActive()) {
+	//			return bullet;
+	//		}
+	//	}
+	//	return nullptr;
+	//}
 }

@@ -3,6 +3,7 @@
 #include <GameDev2D.h>
 #include "Player.h"
 #include "Asteroid.h"
+#include "Constants.h"
 
 namespace GameDev2D
 {
@@ -23,8 +24,15 @@ namespace GameDev2D
 		void OnMouseButtonEvent(MouseButton button, MouseButtonState state, float mouseX, float mouseY);
 		void OnMouseMovedEvent(float mouseX, float mouseY);
 
+		void SpawnBullet(const Vector2& position, const Vector2& velocity);
+
+
+
 	private:
-		Player m_Player;
+		Bullet* GetBulletFromPool();
+		Player* m_Player;
 		std::vector<Asteroid> m_Asteroids;
+		Bullet* m_Bullet[BULLET_POOL_SIZE];
+
 	};
 }

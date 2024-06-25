@@ -1,13 +1,2 @@
-﻿  Asteroid.cpp
-  Bullet.cpp
-  Game.cpp
-  Player.cpp
-C:\Users\Alex\Documents\AC\Grap\A2\GameDev2D-Assignment1\Source\Player.cpp(203,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  (compiling source file '/Source/Player.cpp')
-  
-C:\Users\Alex\Documents\AC\Grap\A2\GameDev2D-Assignment1\Source\Player.cpp(211,18): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-  (compiling source file '/Source/Player.cpp')
-  
-  main.cpp
-  Generating Code...
-  GameDev2D.vcxproj -> C:\Users\Alex\Documents\AC\Grap\A2\GameDev2D-Assignment1\Builds\GameDev2D-GAM1544\Debug\GameDev2D-GAM1544.exe
+﻿  Bullet.cpp
+  GameDev2D.vcxproj -> C:\Users\Alex\Documents\AC\Grap\A2\Asteroid\GameDev2D-Assignment1\Builds\GameDev2D-GAM1544\Debug\GameDev2D-GAM1544.exe

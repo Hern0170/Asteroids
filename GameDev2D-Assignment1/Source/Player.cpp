@@ -6,9 +6,13 @@ namespace GameDev2D
 {
 	Player::Player(Game* game) :
 		m_Game(game),
+		m_CollisionCooldown(2.0f), 
+		m_TimeSinceLastHit(2.0f), 
+		m_PlayerHealth(3),
 		m_Velocity(Vector2::Zero),
 		m_Position(Vector2(GetScreenWidth()* PLAYER_SPAWN_POSITION_X_PCT, GetScreenHeight()* PLAYER_SPAWN_POSITION_Y_PCT)),
 		m_Angle(0.0f),
+		m_Radius(13.0f),
 		m_Controls(Vector2::Zero),
 		m_Shape{},
 		m_Flame{},
@@ -16,7 +20,7 @@ namespace GameDev2D
 	{
 		// Define the player shape.
 
-		m_Shape.push_back( Vector2(  10,   0 ) );
+		m_Shape.push_back(Vector2(10, 0));
 		// Define cannon L
 		m_Shape.push_back(Vector2(-6, 8));
 		m_Shape.push_back(Vector2(6, 8));
@@ -24,18 +28,18 @@ namespace GameDev2D
 		m_Shape.push_back(Vector2(-2, 6));
 
 
-		m_Shape.push_back( Vector2( -10,  10 ) );
-		m_Shape.push_back( Vector2(  -5,   0 ) );
-		m_Shape.push_back( Vector2( -10, -10 ) );
+		m_Shape.push_back(Vector2(-10, 10));
+		m_Shape.push_back(Vector2(-5, 0));
+		m_Shape.push_back(Vector2(-10, -10));
 		//Define cannon R
 		m_Shape.push_back(Vector2(-2, -6));
 		m_Shape.push_back(Vector2(6, -6));
 		m_Shape.push_back(Vector2(6, -8));
 		m_Shape.push_back(Vector2(-6, -8));
-		m_Shape.push_back( Vector2(  10,   0 ) );
+		m_Shape.push_back(Vector2(10, 0));
 
 		//Define flame
-		m_Flame.push_back(Vector2(-8,6));
+		m_Flame.push_back(Vector2(-8, 6));
 		m_Flame.push_back(Vector2(-16, 4));
 		m_Flame.push_back(Vector2(-10, 2));
 		m_Flame.push_back(Vector2(-16, 0));
@@ -44,35 +48,27 @@ namespace GameDev2D
 		m_Flame.push_back(Vector2(-8, -6));
 
 
-		m_Bullets.reserve(BULLET_POOL_SIZE);
-		for (int i = 0; i < BULLET_POOL_SIZE; ++i) {
-			m_Bullets.push_back(new Bullet());
-		}
 	}
 
-	//Player::~Player()
-	//{
-	//	for (auto* bullet : m_Bullets) {
-	//		delete bullet;
-	//	}
-	//}
 
 	void Player::OnUpdate(float delta)
 	{
-
+		if (m_TimeSinceLastHit < m_CollisionCooldown) {
+			m_TimeSinceLastHit += delta;  
+		}
 
 		// Turn.
 		m_Angle += -m_Controls.x * PLAYER_TURN_SPEED * delta;
-		
+
 		// Move.
 		float acceleration = m_Controls.y * PLAYER_ACCELERATION_RATE;
-		float angleRadians = Math::DegreesToRadians( m_Angle );
-		Vector2 direction = Vector2( cos(angleRadians), sin(angleRadians) );
+		float angleRadians = Math::DegreesToRadians(m_Angle);
+		Vector2 direction = Vector2(cos(angleRadians), sin(angleRadians));
 		m_Velocity += direction * acceleration * delta;
 		m_Position += m_Velocity * delta;
 
 		// Cap velocity.
-		if( m_Velocity.Length() > PLAYER_MAX_SPEED)
+		if (m_Velocity.Length() > PLAYER_MAX_SPEED)
 		{
 			m_Velocity = m_Velocity.Normalized() * PLAYER_MAX_SPEED;
 		}
@@ -102,7 +98,7 @@ namespace GameDev2D
 		if (m_Controls.y == 1)
 		{
 			m_FlameTimer += delta;
-			if (m_FlameTimer >= 0.1f) 
+			if (m_FlameTimer >= 0.1f)
 			{
 				m_FlameColorToggle = !m_FlameColorToggle;
 				m_FlameTimer = 0.0f;
@@ -110,38 +106,28 @@ namespace GameDev2D
 		}
 		else
 		{
-			m_FlameTimer = 0.0f; 
+			m_FlameTimer = 0.0f;
 		}
 
-		//for (auto* bullet : m_Bullets) {
-		//	if (bullet->IsActive()) {
-		//		bullet->OnUpdate(delta);
-		//	}
-		//}
-	
+
+
 	}
 
 	void Player::OnRender(BatchRenderer& batchRenderer)
 	{
+		batchRenderer.RenderCircle(m_Position.x-.5, m_Position.y, m_Radius, NULL, GameDev2D::ColorList::Orange,2.0f);
 		if (m_Controls.y == 1)
 		{
 			GameDev2D::Color flameColor = m_FlameColorToggle ? GameDev2D::ColorList::OrangeRed : GameDev2D::ColorList::Orange;
 			batchRenderer.RenderLineStrip(m_Flame, flameColor, 2, m_Position, m_Angle);
 		}
-		batchRenderer.RenderLineStrip( m_Shape, PLAYER_COLOR, 2, m_Position, m_Angle );
-
-
-
-		/*for (Bullet* bullet : m_Bullets) {
-			if (bullet->IsActive()) {
-				bullet->OnRender(batchRenderer);
-			}
-		}*/
+		batchRenderer.RenderLineStrip(m_Shape, PLAYER_COLOR, 2, m_Position, m_Angle);
+		
 	}
 
 	void Player::OnKeyEvent(KeyCode keyCode, KeyState keyState)
 	{
-		if( keyState == KeyState::Down )
+		if (keyState == KeyState::Down)
 		{
 			if (keyCode == KeyCode::Space)
 			{
@@ -162,7 +148,7 @@ namespace GameDev2D
 			}
 		}
 
-		if( keyState == KeyState::Up )
+		if (keyState == KeyState::Up)
 		{
 			if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
 			{
@@ -183,7 +169,7 @@ namespace GameDev2D
 		m_FireLeft = !m_FireLeft;
 
 		float angleRadians = Math::DegreesToRadians(m_Angle);
-		float angleOffset = 0.01f; 
+		float angleOffset = 0.01f;
 		float magnitude = 8.0f;
 		float radians = 0.0f;
 
@@ -211,14 +197,28 @@ namespace GameDev2D
 
 		m_Game->SpawnBullet(position, velocity);
 	}
-
-	//Bullet* Player::GetBulletFromPool()
-	//{
-	//	for (auto* bullet : m_Bullets) {
-	//		if (!bullet->IsActive()) {
-	//			return bullet;
-	//		}
-	//	}
-	//	return nullptr;
-	//}
+	float Player::GetRadius() const
+	{
+		return m_Radius;
+	}
+	Vector2 Player::GetPosition() const
+	{
+		return m_Position;
+	}
+	int Player::GetHealth() const
+	{
+		return m_PlayerHealth;
+	}
+	void Player::SetHealth(int h)
+	{
+		m_PlayerHealth = h;
+	}
+	void Player::ResetCollisionTimer()
+	{
+		m_TimeSinceLastHit = 0;
+	}
+	bool Player::CanBeHit()
+	{
+		return m_TimeSinceLastHit >= m_CollisionCooldown;
+	}
 }

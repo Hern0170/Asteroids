@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Collision.h" />
     <ClInclude Include="Source\Asteroid.h" />
     <ClInclude Include="Source\Bullet.h" />
     <ClInclude Include="Source\Constants.h" />
@@ -89,6 +90,7 @@
     <ClInclude Include="Source\Player.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Collision.cpp" />
     <ClCompile Include="Source\Asteroid.cpp" />
     <ClCompile Include="Source\Bullet.cpp" />
     <ClCompile Include="Source\Framework\Application\GameLoop.cpp" />

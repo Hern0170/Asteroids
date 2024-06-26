@@ -1,6 +1,8 @@
 #pragma once
 
 #include <GameDev2D.h>
+#include <vector>
+
 #include "Player.h"
 #include "Asteroid.h"
 #include "Constants.h"
@@ -8,6 +10,7 @@
 namespace GameDev2D
 {
 	class Game
+
 	{
 	public:
 		Game();
@@ -25,7 +28,10 @@ namespace GameDev2D
 		void OnMouseMovedEvent(float mouseX, float mouseY);
 
 		void SpawnBullet(const Vector2& position, const Vector2& velocity);
-
+		bool CheckCollision(const Player* player, const Asteroid* asteroid);
+		bool CheckCollision(const Bullet* bullet, const Asteroid* asteroid);
+		void Player_AsteroidCollision(Player* Player, Asteroid& asteroid);
+		void Bullet_AsteroidCollision(Bullet* Bullet , Asteroid& asteroid);
 
 
 	private:
@@ -33,6 +39,9 @@ namespace GameDev2D
 		Player* m_Player;
 		std::vector<Asteroid> m_Asteroids;
 		Bullet* m_Bullet[BULLET_POOL_SIZE];
+
+		SpriteFont m_TextHealth;
+
 
 	};
 }

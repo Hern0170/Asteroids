@@ -90,6 +90,7 @@ namespace GameDev2D
 	{
 		if (m_IsActive) {
 			batchRenderer.RenderLineStrip(m_Shape, ASTEROID_COLOR, 2, m_Position, m_Angle);
+			batchRenderer.RenderCircle(m_Position.x - .5, m_Position.y, m_MaxRadius, NULL, GameDev2D::Color::Random(), 2.0f);
 
 		}
 	}

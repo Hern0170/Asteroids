@@ -6,6 +6,9 @@ namespace GameDev2D
 {
 	Player::Player(Game* game) :
 		m_Game(game),
+		m_CollisionCooldown(2.0f), 
+		m_TimeSinceLastHit(2.0f), 
+		m_PlayerHealth(3),
 		m_Velocity(Vector2::Zero),
 		m_Position(Vector2(GetScreenWidth()* PLAYER_SPAWN_POSITION_X_PCT, GetScreenHeight()* PLAYER_SPAWN_POSITION_Y_PCT)),
 		m_Angle(0.0f),
@@ -50,7 +53,9 @@ namespace GameDev2D
 
 	void Player::OnUpdate(float delta)
 	{
-
+		if (m_TimeSinceLastHit < m_CollisionCooldown) {
+			m_TimeSinceLastHit += delta;  
+		}
 
 		// Turn.
 		m_Angle += -m_Controls.x * PLAYER_TURN_SPEED * delta;
@@ -199,5 +204,21 @@ namespace GameDev2D
 	Vector2 Player::GetPosition() const
 	{
 		return m_Position;
+	}
+	int Player::GetHealth() const
+	{
+		return m_PlayerHealth;
+	}
+	void Player::SetHealth(int h)
+	{
+		m_PlayerHealth = h;
+	}
+	void Player::ResetCollisionTimer()
+	{
+		m_TimeSinceLastHit = 0;
+	}
+	bool Player::CanBeHit()
+	{
+		return m_TimeSinceLastHit >= m_CollisionCooldown;
 	}
 }

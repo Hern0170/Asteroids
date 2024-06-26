@@ -40,5 +40,8 @@ namespace GameDev2D
 		std::vector<Asteroid> m_Asteroids;
 		Bullet* m_Bullet[BULLET_POOL_SIZE];
 
+		SpriteFont m_TextHealth;
+
+
 	};
 }

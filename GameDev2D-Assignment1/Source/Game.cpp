@@ -5,6 +5,7 @@
 namespace GameDev2D
 {
 	Game::Game() :
+		m_TextHealth("OpenSans-CondBold_72"),
 		m_Player(nullptr),
 		m_Asteroids{}
 	{
@@ -17,6 +18,9 @@ namespace GameDev2D
 		{
 			m_Bullet[i] = new Bullet();
 		}
+
+		m_TextHealth.SetText("Lives: " + std::to_string(m_Player->GetHealth()));
+
 	}
 
 	Game::~Game()
@@ -71,6 +75,7 @@ namespace GameDev2D
 	void Game::OnRender(BatchRenderer& batchRenderer)
 	{
 		batchRenderer.BeginScene();
+		batchRenderer.RenderSpriteFont(m_TextHealth);
 		for (int i = 0; i < BULLET_POOL_SIZE; i++)
 		{
 			m_Bullet[i]->OnRender(batchRenderer);
@@ -112,9 +117,18 @@ namespace GameDev2D
 		return distanceSquared <= (radiiSum * radiiSum);
 	}
 
-	void Game::Player_AsteroidCollision(Player* Player, Asteroid& asteroid)
+	void Game::Player_AsteroidCollision(Player* player, Asteroid& asteroid)
 	{
-		exit(0);
+		if (player->CanBeHit() && asteroid.IsActive()) {  
+			player->SetHealth(player->GetHealth() - 1); 
+			m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
+			player->ResetCollisionTimer();  
+
+			if (player->GetHealth() <= 0) {
+				exit(0);  
+			}
+		}
+		
 	}
 
 	void Game::Bullet_AsteroidCollision(Bullet* bullet, Asteroid& asteroid)

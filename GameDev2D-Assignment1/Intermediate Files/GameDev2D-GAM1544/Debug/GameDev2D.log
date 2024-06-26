@@ -1,5 +1,2 @@
-﻿  Asteroid.cpp
-C:\Users\Alex\Documents\AC\Grap\A2\Asteroid\GameDev2D-Assignment1\Source\Asteroid.cpp(93,44): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  (compiling source file '/Source/Asteroid.cpp')
-  
+﻿  Shield.cpp
   GameDev2D.vcxproj -> C:\Users\Alex\Documents\AC\Grap\A2\Asteroid\GameDev2D-Assignment1\Builds\GameDev2D-GAM1544\Debug\GameDev2D-GAM1544.exe

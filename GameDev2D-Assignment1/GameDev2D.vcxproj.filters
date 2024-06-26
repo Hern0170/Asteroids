@@ -332,6 +332,7 @@
       <Filter>Source</Filter>
     </ClInclude>
     <ClInclude Include="Source\Collision.h" />
+    <ClInclude Include="Source\Shield.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Libraries\stb_image\stb_image.cpp">
@@ -503,6 +504,7 @@
       <Filter>Source</Filter>
     </ClCompile>
     <ClCompile Include="Source\Collision.cpp" />
+    <ClCompile Include="Source\Shield.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Libraries\jsoncpp\json_internalarray.inl">

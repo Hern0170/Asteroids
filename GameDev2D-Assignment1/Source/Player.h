@@ -43,6 +43,7 @@ namespace GameDev2D
 		float m_FlameTimer; 
 		bool m_FlameColorToggle;
 		bool m_FireLeft;
+
 		int m_PlayerHealth;
 
 

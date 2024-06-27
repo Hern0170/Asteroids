@@ -8,7 +8,7 @@ namespace GameDev2D
 		m_Game(game),
 		m_CollisionCooldown(2.0f), 
 		m_TimeSinceLastHit(2.0f), 
-		m_PlayerHealth(3),
+		m_PlayerHealth(PLAYER_HEALTH),
 		m_Velocity(Vector2::Zero),
 		m_Position(Vector2(GetScreenWidth()* PLAYER_SPAWN_POSITION_X_PCT, GetScreenHeight()* PLAYER_SPAWN_POSITION_Y_PCT)),
 		m_Angle(0.0f),
@@ -115,7 +115,9 @@ namespace GameDev2D
 
 	void Player::OnRender(BatchRenderer& batchRenderer)
 	{
-		batchRenderer.RenderCircle(m_Position.x-.5, m_Position.y, m_Radius, NULL, GameDev2D::ColorList::Orange,2.0f);
+		if (m_PlayerHealth > 1) {
+			batchRenderer.RenderCircle(m_Position.x - 0.5f, m_Position.y, m_Radius, NULL, GameDev2D::ColorList::Orange, 2.0f);
+		}
 		if (m_Controls.y == 1)
 		{
 			GameDev2D::Color flameColor = m_FlameColorToggle ? GameDev2D::ColorList::OrangeRed : GameDev2D::ColorList::Orange;
@@ -180,7 +182,7 @@ namespace GameDev2D
 		{
 			direction = Vector2(cos(angleRadians - angleOffset), sin(angleRadians - angleOffset));
 
-			radians = angleRadians + M_PI_2; // Half pi or 90 degrees
+			radians = static_cast<float>(angleRadians + M_PI_2); // Half pi or 90 degrees
 			Vector2 leftEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + leftEdge;
 		}
@@ -188,7 +190,7 @@ namespace GameDev2D
 		{
 			direction = Vector2(cos(angleRadians + angleOffset), sin(angleRadians + angleOffset));
 
-			radians = angleRadians - M_PI_2; // Half pi or 90 degrees
+			radians = static_cast<float>(angleRadians + M_PI_2); // Half pi or 90 degrees
 			Vector2 rightEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + rightEdge;
 		}
@@ -196,6 +198,8 @@ namespace GameDev2D
 		Vector2 velocity = direction * 500.0f; // Velocidad de la bala
 
 		m_Game->SpawnBullet(position, velocity);
+
+
 	}
 	float Player::GetRadius() const
 	{

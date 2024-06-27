@@ -63,9 +63,9 @@ namespace GameDev2D
     {
         if (m_IsActive)
         {
-            batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius + BULLET_RADIUS_INC, ColorList::Blue);
+            batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius + BULLET_RADIUS_INC, GameDev2D::Color::Random(),  ColorList::GhostWhite, BULLET_OUTLINE);
 
-            batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius, ColorList::LightBlue);
+            
         }
 
     }

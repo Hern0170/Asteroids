@@ -29,7 +29,7 @@ const int BULLET_RADIUS_INC = 3;
 const int BULLET_OUTLINE = 1;
 const float BULLET_TIME_ACTIVE = 2.0f;
 
-const int SHIELD_POOL_SIZE = 3;
+const int SHIELD_POOL_SIZE = 2;
 const float SHIELD_TIME_ACTIVE = 2.0f;
 
 

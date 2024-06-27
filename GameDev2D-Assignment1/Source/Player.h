@@ -28,6 +28,10 @@ namespace GameDev2D
 		void ResetCollisionTimer(); 
 		bool CanBeHit();
 
+
+		void ActivateShield();
+		void DeactivateShield();
+
 	private:
 		Game* m_Game;
 		Vector2 m_Velocity;
@@ -50,5 +54,11 @@ namespace GameDev2D
 
 		float m_CollisionCooldown; 
 		float m_TimeSinceLastHit;
+
+		// Shield properties
+		bool m_ShieldActive;
+		float m_OrbitRadius;
+		float m_Radians[3];  
+		float m_AngularVelocity;  
 	};
 }

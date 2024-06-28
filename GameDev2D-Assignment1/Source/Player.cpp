@@ -16,7 +16,10 @@ namespace GameDev2D
 		m_Controls(Vector2::Zero),
 		m_Shape{},
 		m_Flame{},
-		m_FireLeft(true)
+		m_FireLeft(true),
+		m_ShieldActive(false),
+		m_OrbitRadius(20.0f),
+		m_AngularVelocity(300.0f)
 	{
 		// Define the player shape.
 
@@ -47,7 +50,10 @@ namespace GameDev2D
 		m_Flame.push_back(Vector2(-16, -4));
 		m_Flame.push_back(Vector2(-8, -6));
 
-
+		
+		for (int i = 0; i < 3; i++) {
+			m_Radians[i] = i * 2 * M_PI / 3;
+		}
 	}
 
 
@@ -56,6 +62,17 @@ namespace GameDev2D
 		if (m_TimeSinceLastHit < m_CollisionCooldown) {
 			m_TimeSinceLastHit += delta;  
 		}
+		if (m_PlayerHealth > 1)
+		{
+			for (int i = 0; i < 3; i++) {
+				m_Radians[i] += Math::DegreesToRadians(m_AngularVelocity) * delta;
+				if (m_Radians[i] >= 2 * M_PI) {
+					m_Radians[i] -= 2 * M_PI;
+				}
+			}
+
+		}
+		
 
 		// Turn.
 		m_Angle += -m_Controls.x * PLAYER_TURN_SPEED * delta;
@@ -115,8 +132,15 @@ namespace GameDev2D
 
 	void Player::OnRender(BatchRenderer& batchRenderer)
 	{
-		if (m_PlayerHealth > 1) {
-			batchRenderer.RenderCircle(m_Position.x - 0.5f, m_Position.y, m_Radius, NULL, GameDev2D::ColorList::Orange, 2.0f);
+		if (m_PlayerHealth > 1) 
+		{
+			for (int i = 0; i < 3; i++) 
+			{
+				float x = m_Position.x + cos(m_Radians[i]) * m_OrbitRadius;
+				float y = m_Position.y + sin(m_Radians[i]) * m_OrbitRadius;
+				batchRenderer.RenderCircle(x, y, 2.0f, NULL, GameDev2D::ColorList::Green, 2.0f);  // Renderiza cada círculo
+			}
+			
 		}
 		if (m_Controls.y == 1)
 		{
@@ -224,5 +248,15 @@ namespace GameDev2D
 	bool Player::CanBeHit()
 	{
 		return m_TimeSinceLastHit >= m_CollisionCooldown;
+	}
+	void Player::ActivateShield()
+	{
+	}
+	void Player::DeactivateShield()
+	{
+	}
+	void Player::SetPosition()
+	{
+		m_Position = Vector2(Math::RandomFloat(0, (float)GameDev2D::GetScreenWidth()), Math::RandomFloat(0, (float)GameDev2D::GetScreenHeight()));
 	}
 }

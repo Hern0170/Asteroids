@@ -78,7 +78,7 @@ namespace GameDev2D
 		
 		if (m_Playing) 
 		{
-			if (m_asteroidsCount > 0 && m_Player->GetHealth() > 0) {
+			if (m_asteroidsCount > 0) {
 				m_Timer += delta; 
 			}
 			else {
@@ -133,15 +133,10 @@ namespace GameDev2D
 	void Game::OnRender(BatchRenderer& batchRenderer)
 	{
 		batchRenderer.BeginScene();
-		if (m_asteroidsCount == 0 || m_Player->GetHealth() <= 0)
+		if (m_asteroidsCount == 0 )
 		{
 			m_Playing = false;
 			End();
-			if (m_Player->GetHealth() <= 0)
-			{
-				batchRenderer.RenderSpriteFont(m_TextAsteroids);
-
-			}
 			batchRenderer.RenderSpriteFont(m_TextWin);
 			batchRenderer.RenderSpriteFont(m_TextTime);
 
@@ -239,18 +234,27 @@ namespace GameDev2D
 	void Game::Player_AsteroidCollision(Player* player, Asteroid& asteroid)
 	{
 		if (player->CanBeHit() && asteroid.IsActive()) {  
-			player->SetHealth(player->GetHealth() - 1); 
-			m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
-			player->ResetCollisionTimer();  
 
-			if (player->GetHealth() <= 0) {
-
-				m_TextWin.SetText("YOU LOSE!");
-				m_TextAsteroids.SetText("Remaining Asteroids: " + std::to_string(m_asteroidsCount));
-				m_TextAsteroids.SetPosition(GetHalfScreenWidth() - 300.0f, GetHalfScreenHeight() - 100.0f);
-				End();
-				return;
+			if (player->GetHealth() == 2)
+			{
+				asteroid.SetIsActiveFalse();
+				m_asteroidsCount--;
+				m_TextAsteroids.SetText("Asteroids: " + std::to_string(m_asteroidsCount));
 			}
+			player->SetHealth(player->GetHealth() - 1); 
+			if (player->GetHealth() < 1) {
+
+				player->SetPosition();
+				player->SetHealth(1);
+				
+				/*m_TextWin.SetText("YOU LOSE!");
+				m_TextAsteroids.SetText("Remaining Asteroids: " + std::to_string(m_asteroidsCount));
+				m_TextAsteroids.SetPosition(GetHalfScreenWidth() - 300.0f, GetHalfScreenHeight() - 100.0f);*/
+				//End();
+				//return;
+			}
+			m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
+			player->ResetCollisionTimer();
 		}
 		
 	}
@@ -261,6 +265,7 @@ namespace GameDev2D
 			shield->SetIsActiveFalse();
 			player->SetHealth(player->GetHealth() + 1);
 			m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
+
 		}
 		
 

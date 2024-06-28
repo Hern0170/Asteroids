@@ -34,15 +34,6 @@ namespace GameDev2D
 	{
 
 		if (m_IsActive) {
-			
-
-			/*m_ShieldTimer += delta;
-			if (m_ShieldTimer >= BULLET_TIME_ACTIVE) {
-				m_IsActive = false;
-				m_ShieldTimer = 0.0f;
-			}*/
-
-
 			if (m_Position.x < 0)
 			{
 				m_Position.x += GameDev2D::GetScreenWidth();
@@ -62,8 +53,6 @@ namespace GameDev2D
 			{
 				m_Position.y -= GameDev2D::GetScreenHeight();
 			}
-
-
 
 		}
 	}

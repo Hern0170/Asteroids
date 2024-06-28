@@ -255,4 +255,8 @@ namespace GameDev2D
 	void Player::DeactivateShield()
 	{
 	}
+	void Player::SetPosition()
+	{
+		m_Position = Vector2(Math::RandomFloat(0, (float)GameDev2D::GetScreenWidth()), Math::RandomFloat(0, (float)GameDev2D::GetScreenHeight()));
+	}
 }

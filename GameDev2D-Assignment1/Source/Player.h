@@ -32,6 +32,8 @@ namespace GameDev2D
 		void ActivateShield();
 		void DeactivateShield();
 
+		void SetPosition();
+
 	private:
 		Game* m_Game;
 		Vector2 m_Velocity;

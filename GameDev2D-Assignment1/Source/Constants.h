@@ -24,11 +24,23 @@ const float ASTEROID_MIN_RADIUS = 10.0f;
 const float ASTEROID_MAX_RADIUS = 30.0f;
 const GameDev2D::Color ASTEROID_COLOR = GameDev2D::ColorList::SlateGray;
 
-const int BULLET_POOL_SIZE = 25;
+const int BULLET_POOL_SIZE = 110;
+
 const int BULLET_RADIUS_INC = 3;
+const int BULLET_BURST_RADIUS_INC = 0;
+const int BULLET_CHARGED_RADIUS_INC = 0;
+const int BURST_FIRE_MAX = 20;
+
 const int BULLET_OUTLINE = 1;
 const float BULLET_TIME_ACTIVE = 2.0f;
 const float LASER_SPEED = 500.0f;
+
+static const GameDev2D::Color BULLET_COLOR = GameDev2D::Color::Random();
+static const GameDev2D::Color BULLET_BURST_COLOR = GameDev2D::ColorList::Yellow;
+static const GameDev2D::Color BULLET_CHARGED_COLOR = GameDev2D::ColorList::Green;
+
+
+const float RAPID_FIRE_INTERVAL = 0.0001f;
 
 const int SHIELD_POOL_SIZE = 2;
 const float SHIELD_TIME_ACTIVE = 20.0f;

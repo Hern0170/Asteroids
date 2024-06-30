@@ -34,33 +34,46 @@ namespace GameDev2D
 
 		void SetPosition();
 
+
 	private:
+
 		Game* m_Game;
+
+		//Movement
 		Vector2 m_Velocity;
 		Vector2 m_Position;
 		float m_Angle;
 		Vector2 m_Controls;
 		float m_Radius;
 
+		//Ship Shape
 		std::vector<Vector2> m_Shape;
 		std::vector<Vector2> m_Flame;
 
-
+		//Flame Properties
 		float m_FlameTimer; 
 		bool m_FlameColorToggle;
 		bool m_FireLeft;
 
-		int m_PlayerHealth;
 
 
-
+		//Collision properties
 		float m_CollisionCooldown; 
 		float m_TimeSinceLastHit;
 
 		// Shield properties
+		int m_PlayerHealth;
+
 		bool m_ShieldActive;
 		float m_OrbitRadius;
 		float m_Radians[3];  
 		float m_AngularVelocity;  
+
+		bool m_Burst;
+		float m_TimerShoot;
+
+		bool m_Charged;
+		float m_TimerChargedShoot;
+		int m_BurstFireCount;
 	};
 }

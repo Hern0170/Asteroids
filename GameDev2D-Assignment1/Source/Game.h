@@ -29,6 +29,7 @@ namespace GameDev2D
 		void OnMouseMovedEvent(float mouseX, float mouseY);
 
 		void SpawnBullet(const Vector2& position, const Vector2& velocity);
+		void SpawnBullet(const Vector2& position, const Vector2& velocity, const GameDev2D::Color color, float size);
 		void SpawnShield(const Vector2& position);
 
 
@@ -43,7 +44,7 @@ namespace GameDev2D
 		void Bullet_AsteroidCollision(Bullet* Bullet , Asteroid& asteroid);
 
 
-		//void Shield_AsteroidCollision(Bullet bullet, Asteroid& asteroid);
+
 
 		void End();
 
@@ -54,7 +55,7 @@ namespace GameDev2D
 
 		Player* m_Player;
 		std::vector<Asteroid> m_Asteroids;
-		//std::vector<Shield> m_Shield;
+
 		Shield* m_Shield[SHIELD_POOL_SIZE];
 		Bullet* m_Bullet[BULLET_POOL_SIZE];
 

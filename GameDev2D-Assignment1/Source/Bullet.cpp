@@ -9,7 +9,8 @@ namespace GameDev2D
         m_Position(position),
         m_Velocity(velocity),
         m_Radius(1.0f),
-       m_IsActive(false)
+       m_IsActive(false),
+       m_Color(BULLET_COLOR)
     {
     }
 
@@ -63,9 +64,7 @@ namespace GameDev2D
     {
         if (m_IsActive)
         {
-            batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius + BULLET_RADIUS_INC, GameDev2D::Color::Random(),  ColorList::GhostWhite, BULLET_OUTLINE);
-
-            
+            batchRenderer.RenderCircle(m_Position.x, m_Position.y, m_Radius + BULLET_RADIUS_INC, m_Color,  ColorList::GhostWhite, BULLET_OUTLINE);
         }
 
     }
@@ -89,6 +88,15 @@ namespace GameDev2D
             m_Velocity = velocity;
             m_IsActive = true;
             m_BulletTimer = 0.0f;
+    }
+    void Bullet::Activate(const Vector2& position, const Vector2& velocity, const GameDev2D::Color color, float size)
+    {
+        m_Position = position;
+        m_Velocity = velocity;
+        m_IsActive = true;
+        m_BulletTimer = 0.0f;
+        m_Color = color;
+        m_Radius = size;
     }
     void Bullet::SetIsActiveFalse()
     {

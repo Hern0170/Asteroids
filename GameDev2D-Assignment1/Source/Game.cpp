@@ -182,6 +182,15 @@ namespace GameDev2D
 		}
 	}
 
+	void Game::SpawnBullet(const Vector2& position, const Vector2& velocity, const GameDev2D::Color color, float size)
+	{
+		Bullet* bullet = GetBulletFromPool();
+		if (bullet != nullptr)
+		{
+			bullet->Activate(position, velocity, color, size);
+		}
+	}
+
 	void Game::SpawnShield(const Vector2& position)
 	{
 			Shield* shield = GetShieldFromPool();
@@ -268,7 +277,7 @@ namespace GameDev2D
 
 	void Game::Bullet_AsteroidCollision(Bullet* bullet, Asteroid& asteroid)
 	{
-		
+
 		asteroid.SetIsActiveFalse();
 		bullet->SetIsActiveFalse();
 		m_asteroidsCount--;

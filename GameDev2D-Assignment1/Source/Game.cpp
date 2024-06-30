@@ -246,12 +246,7 @@ namespace GameDev2D
 
 				player->SetPosition();
 				player->SetHealth(1);
-				
-				/*m_TextWin.SetText("YOU LOSE!");
-				m_TextAsteroids.SetText("Remaining Asteroids: " + std::to_string(m_asteroidsCount));
-				m_TextAsteroids.SetPosition(GetHalfScreenWidth() - 300.0f, GetHalfScreenHeight() - 100.0f);*/
-				//End();
-				//return;
+			
 			}
 			m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
 			player->ResetCollisionTimer();
@@ -278,7 +273,7 @@ namespace GameDev2D
 		bullet->SetIsActiveFalse();
 		m_asteroidsCount--;
 		m_TextAsteroids.SetText("Asteroids: " + std::to_string(m_asteroidsCount));
-		if (Math::RandomInt(1, 7) == 7 || m_Player->GetHealth() <= 2)
+		if (Math::RandomInt(1, 7) == 7 && m_Player->GetHealth() <= 2)
 		{
 			SpawnShield(asteroid.GetPosition());
 
@@ -286,11 +281,6 @@ namespace GameDev2D
 
 		
 	}
-
-	//void Game::Shield_AsteroidCollision(Bullet bullet, Asteroid& asteroid)
-	//{
-	//	
-	//}
 
 	void Game::End()
 	{

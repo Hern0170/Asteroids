@@ -158,6 +158,7 @@ namespace GameDev2D
 			if (keyCode == KeyCode::Space)
 			{
 				Shoot();
+				
 
 			}
 			if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
@@ -207,21 +208,22 @@ namespace GameDev2D
 			direction = Vector2(cos(angleRadians - angleOffset), sin(angleRadians - angleOffset));
 
 			radians = static_cast<float>(angleRadians + M_PI_2); // Half pi or 90 degrees
-			Vector2 leftEdge = Vector2(cos(radians), sin(radians)) * magnitude;
+			Vector2 leftEdge = Vector2(cos(radians) , sin(radians)) * magnitude;
 			position = m_Position + leftEdge;
 		}
 		else
 		{
 			direction = Vector2(cos(angleRadians + angleOffset), sin(angleRadians + angleOffset));
 
-			radians = static_cast<float>(angleRadians + M_PI_2); // Half pi or 90 degrees
+			radians = static_cast<float>(angleRadians - M_PI_2); // Half pi or 90 degrees
 			Vector2 rightEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + rightEdge;
 		}
 
-		Vector2 velocity = direction * 500.0f; // Velocidad de la bala
+		Vector2 velocity = direction * LASER_SPEED; 
 
 		m_Game->SpawnBullet(position, velocity);
+
 
 
 	}

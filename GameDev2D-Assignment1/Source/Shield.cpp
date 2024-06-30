@@ -34,6 +34,14 @@ namespace GameDev2D
 	{
 
 		if (m_IsActive) {
+
+
+			m_ShieldTimer += delta;
+			if (m_ShieldTimer >= SHIELD_TIME_ACTIVE) {
+				m_IsActive = false;
+				m_ShieldTimer = 0.0f;
+			}
+
 			if (m_Position.x < 0)
 			{
 				m_Position.x += GameDev2D::GetScreenWidth();

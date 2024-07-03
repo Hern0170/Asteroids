@@ -242,7 +242,7 @@ namespace GameDev2D
 
 	void Game::Player_AsteroidCollision(Player* player, Asteroid& asteroid)
 	{
-		if (player->CanBeHit() && asteroid.IsActive()) {  
+		if (player->CanBeHit() && asteroid.IsActive() && !player->GetCharged()) {  
 
 			if (player->GetHealth() == 2)
 			{

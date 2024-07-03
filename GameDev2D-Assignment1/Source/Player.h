@@ -34,6 +34,7 @@ namespace GameDev2D
 
 		void SetPosition();
 
+		bool GetCharged();
 
 	private:
 
@@ -75,5 +76,6 @@ namespace GameDev2D
 		bool m_Charged;
 		float m_TimerChargedShoot;
 		int m_BurstFireCount;
+
 	};
 }

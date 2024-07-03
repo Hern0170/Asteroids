@@ -115,7 +115,15 @@ namespace GameDev2D
 		// Cap velocity.
 		if (m_Velocity.Length() > PLAYER_MAX_SPEED)
 		{
-			m_Velocity = m_Velocity.Normalized() * PLAYER_MAX_SPEED;
+			if (!m_Charged) {
+				m_Velocity = m_Velocity.Normalized() * PLAYER_MAX_SPEED;
+
+			}
+			else {
+
+				m_Velocity = m_Velocity.Normalized() * 400;
+
+			}
 		}
 
 		// Teleport.
@@ -263,15 +271,25 @@ namespace GameDev2D
 			Vector2 rightEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + rightEdge;
 		}
+		Vector2 velocity;
 
-		Vector2 velocity = direction * LASER_SPEED; 
+		if (!m_Charged) 
+		{
+			velocity = direction * LASER_SPEED;
+
+		}
+		else {
+			velocity = direction * -100;
+
+
+		}
 		if (m_Burst) 
 		{
 			m_Game->SpawnBullet(position, velocity, BULLET_BURST_COLOR, BULLET_BURST_RADIUS_INC);
 		}
 		else if(m_Charged)
 		{
-			m_Game->SpawnBullet(position, velocity , BULLET_CHARGED_COLOR, BULLET_CHARGED_RADIUS_INC);
+			m_Game->SpawnBullet(position, velocity , GameDev2D::ColorList::Red, BULLET_CHARGED_RADIUS_INC);
 
 		}
 		else
@@ -313,5 +331,9 @@ namespace GameDev2D
 	void Player::SetPosition()
 	{
 		m_Position = Vector2(Math::RandomFloat(0, (float)GameDev2D::GetScreenWidth()), Math::RandomFloat(0, (float)GameDev2D::GetScreenHeight()));
+	}
+	bool Player::GetCharged()
+	{
+		return m_Charged;
 	}
 }

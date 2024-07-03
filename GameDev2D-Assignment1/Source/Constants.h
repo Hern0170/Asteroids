@@ -22,7 +22,8 @@ const int ASTEROID_MIN_SIDES = 10;
 const int ASTEROID_MAX_SIDES = 20;
 const float ASTEROID_MIN_RADIUS = 10.0f;
 const float ASTEROID_MAX_RADIUS = 30.0f;
-const GameDev2D::Color ASTEROID_COLOR = GameDev2D::ColorList::SlateGray;
+//const GameDev2D::Color ASTEROID_COLOR = GameDev2D::ColorList::SlateGray;
+const GameDev2D::Color ASTEROID_COLOR = GameDev2D::Color::Random();
 
 const int BULLET_POOL_SIZE = 110;
 

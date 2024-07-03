@@ -1,8 +1,4 @@
 ﻿  Player.cpp
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Player.cpp(60,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  (compiling source file '/Source/Player.cpp')
-  
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Player.cpp(75,30): warning C4305: '-=': truncation from 'double' to 'float'
-  (compiling source file '/Source/Player.cpp')
-  
-  GameDev2D.vcxproj -> C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Builds\GameDev2D-GAM1544\Debug\GameDev2D-GAM1544.exe
+C:\Users\hern0170\Documents\GitHub\Asteroids\GameDev2D-Assignment1\Source\Player.cpp(60,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\hern0170\Documents\GitHub\Asteroids\GameDev2D-Assignment1\Source\Player.cpp(75,30): warning C4305: '-=': truncation from 'double' to 'float'
+  GameDev2D.vcxproj -> C:\Users\hern0170\Documents\GitHub\Asteroids\GameDev2D-Assignment1\Builds\GameDev2D-GAM1544\Debug\GameDev2D-GAM1544.exe

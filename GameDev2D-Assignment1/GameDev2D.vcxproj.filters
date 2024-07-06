@@ -536,4 +536,45 @@
       <Filter>Config</Filter>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\Audio\Fanfare.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\Space.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\BaseShoot.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\BurstShoot.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\Explosion_A.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\Explosion_B.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\Explosion_C.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\Loop.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\PlayerHit.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\ShieldCollision.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\ShieldSpawn.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\ShieldTaken.wav">
+      <Filter>Assets</Filter>
+    </Media>
+    <Media Include="Assets\Audio\Start.wav">
+      <Filter>Assets</Filter>
+    </Media>
+  </ItemGroup>
 </Project>

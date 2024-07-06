@@ -9,11 +9,21 @@ namespace GameDev2D
 		m_TextAsteroids("OpenSans-CondBold_72"),
 		m_TextWin("OpenSans-CondBold_72"),
 		m_TextTime("OpenSans-CondBold_72"),
+		m_TextIntro("OpenSans-CondBold_72"),
+		m_TextAutor("OpenSans-CondBold_72"),
+		m_TextStart("OpenSans-CondBold_72"),
 		m_Timer(0.0f),
 		m_asteroidsCount(NUM_ASTEROIDS),
 		m_Player(nullptr),
-		m_Playing(true),
-		m_Asteroids{}
+		m_Playing(false),
+		m_Intro(true),
+		m_StartToggle(true),
+		m_StartTimer(0.0f),
+		m_Asteroids{},
+		m_SoundMenu("Loop"),
+		m_SoundStart("Start"),
+		m_SoundGame("Space")
+
 	{
 		m_Player = new Player(this);
 		
@@ -33,16 +43,33 @@ namespace GameDev2D
 		}
 
 
+
+		m_TextIntro.SetText("ASTEROID HUNTER\n");
+		m_TextIntro.SetPosition(static_cast<float>(GetHalfScreenWidth() - 300.0f), static_cast<float>(GetHalfScreenHeight()));
+
+		m_TextAutor.SetText("BY GABRIEL\n  \n ");
+		m_TextAutor.SetPosition(static_cast<float>(GetHalfScreenWidth() - 300.0f), static_cast<float>(GetHalfScreenHeight() +10.0f));
+		m_TextAutor.SetScale(0.3f, 0.3f);
+
+
+		m_TextStart.SetText("\n\n\n\nPRESS ENTER TO START");
+		m_TextStart.SetPosition(static_cast<float>(GetHalfScreenWidth() - 240.0f), static_cast<float>(GetHalfScreenHeight()-100.0f));
+		m_TextStart.SetColor(GameDev2D::ColorList::SlateGray);
+		m_TextStart.SetScale(0.6f, 0.6f);
+
 		m_TextHealth.SetText("Lives: " + std::to_string(m_Player->GetHealth()));
+
 		m_TextAsteroids.SetText("Asteroids: " + std::to_string(m_asteroidsCount));
-		m_TextTime.SetText("TIME: " + std::to_string(m_Timer) + " SECONDS");
 		m_TextAsteroids.SetPosition(10.0f, 100.0f);
+
+		m_TextTime.SetText("TIME: " + std::to_string(m_Timer) + " SECONDS");
 		m_TextTime.SetPosition(static_cast<float>(GetHalfScreenWidth()-300.0f), static_cast<float>(GetHalfScreenHeight()));
 		m_TextWin.SetPosition(GetHalfScreenWidth()-300.0f, GetHalfScreenHeight()+100.0f);
 
 		m_TextWin.SetText("YOU WIN!");
 		
 
+		m_SoundMenu.SetVolume(0.5f);
 	}
 
 	Game::~Game()
@@ -75,7 +102,20 @@ namespace GameDev2D
 
 	void Game::OnUpdate(float delta)
 	{
-		
+
+		if (m_Intro)
+		{
+			m_SoundMenu.Play();
+			m_SoundMenu.DoesLoop();
+			
+			m_StartTimer += delta;
+			if (m_StartTimer >= 1.0f)
+			{
+				m_StartToggle = !m_StartToggle;
+				m_StartTimer = 0.0f;
+			}
+		}
+
 		if (m_Playing) 
 		{
 			if (m_asteroidsCount > 0) {
@@ -133,6 +173,19 @@ namespace GameDev2D
 	void Game::OnRender(BatchRenderer& batchRenderer)
 	{
 		batchRenderer.BeginScene();
+		if (m_Intro) 
+		{
+			batchRenderer.RenderSpriteFont(m_TextIntro);
+			batchRenderer.RenderSpriteFont(m_TextAutor);
+
+			
+			if(m_StartToggle) 
+			{
+				batchRenderer.RenderSpriteFont(m_TextStart);
+
+			}
+
+		}
 		if (m_asteroidsCount == 0 )
 		{
 			m_Playing = false;
@@ -142,9 +195,10 @@ namespace GameDev2D
 
 		}
 
+
 		if (m_Playing)
 		{
-			batchRenderer.RenderSpriteFont(m_TextHealth);
+			//batchRenderer.RenderSpriteFont(m_TextHealth);
 			batchRenderer.RenderSpriteFont(m_TextAsteroids);
 
 		
@@ -257,7 +311,7 @@ namespace GameDev2D
 				player->SetHealth(1);
 			
 			}
-			m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
+			//m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
 			player->ResetCollisionTimer();
 		}
 		
@@ -268,7 +322,7 @@ namespace GameDev2D
 		if (player->GetHealth() == 1) {
 			shield->SetIsActiveFalse();
 			player->SetHealth(player->GetHealth() + 1);
-			m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
+			//m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
 
 		}
 		
@@ -328,6 +382,24 @@ namespace GameDev2D
 	void Game::OnKeyEvent(KeyCode keyCode, KeyState keyState)
 	{
 		m_Player->OnKeyEvent( keyCode, keyState );
+
+		if (keyState == KeyState::Down)
+		{
+			if (keyCode == KeyCode::Enter)
+			{
+				if (m_Intro)
+				{
+					m_SoundStart.Play();
+					m_SoundMenu.FadeOut(.3f);
+					m_SoundGame.SetVolume(0.3f);
+					m_SoundGame.FadeIn(0.4f);
+					m_Intro = false;
+					m_Playing = true;
+				}
+				
+
+			}
+		}
 	}
 
 	void Game::OnMouseButtonEvent(MouseButton button, MouseButtonState state, float mouseX, float mouseY)

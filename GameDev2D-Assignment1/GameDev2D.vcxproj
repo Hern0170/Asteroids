@@ -180,6 +180,21 @@
     <None Include="Source\Libraries\jsoncpp\json_internalmap.inl" />
     <None Include="Source\Libraries\jsoncpp\json_valueiterator.inl" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="Assets\Audio\BaseShoot.wav" />
+    <Media Include="Assets\Audio\BurstShoot.wav" />
+    <Media Include="Assets\Audio\Explosion_A.wav" />
+    <Media Include="Assets\Audio\Explosion_B.wav" />
+    <Media Include="Assets\Audio\Explosion_C.wav" />
+    <Media Include="Assets\Audio\Fanfare.wav" />
+    <Media Include="Assets\Audio\Loop.wav" />
+    <Media Include="Assets\Audio\PlayerHit.wav" />
+    <Media Include="Assets\Audio\ShieldCollision.wav" />
+    <Media Include="Assets\Audio\ShieldSpawn.wav" />
+    <Media Include="Assets\Audio\ShieldTaken.wav" />
+    <Media Include="Assets\Audio\Space.wav" />
+    <Media Include="Assets\Audio\Start.wav" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>

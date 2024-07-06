@@ -3,6 +3,7 @@
 #include <GameDev2D.h>
 #include <vector>
 
+
 #include "Player.h"
 #include "Asteroid.h"
 #include "Constants.h"
@@ -43,7 +44,7 @@ namespace GameDev2D
 
 		void Bullet_AsteroidCollision(Bullet* Bullet , Asteroid& asteroid);
 
-
+		
 
 
 		void End();
@@ -63,11 +64,26 @@ namespace GameDev2D
 		SpriteFont m_TextAsteroids;
 		SpriteFont m_TextWin;
 		SpriteFont m_TextTime;
-
+		SpriteFont m_TextIntro;
+		SpriteFont m_TextStart;
+		SpriteFont m_TextAutor;
 
 		float m_Timer;
 		int m_asteroidsCount;
 		bool m_Playing;
+		bool m_Intro;
+
+
+		float m_StartTimer;
+		bool m_StartToggle;
+
+		Audio m_SoundMenu;
+		Audio m_SoundStart;
+		Audio m_SoundGame;
+		Audio m_SoundBasic;
+		Audio m_SoundBurst;
+		Audio m_SoundCharged;
+
 
 	};
 }

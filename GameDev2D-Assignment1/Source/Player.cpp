@@ -184,6 +184,9 @@ namespace GameDev2D
 			batchRenderer.RenderLineStrip(m_Flame, flameColor, 2, m_Position, m_Angle);
 		}
 		batchRenderer.RenderLineStrip(m_Shape, PLAYER_COLOR, 2, m_Position, m_Angle);
+		if(m_Charged)
+		batchRenderer.RenderCircle(m_Position.x,m_Position.y, 14.0f, NULL, GameDev2D::ColorList::LightBlue, 3.0f);  // Renderiza cada círculo
+
 		
 	}
 
@@ -196,7 +199,7 @@ namespace GameDev2D
 				if(!m_Burst) Shoot();	
 
 			}
-			if (keyCode == KeyCode::R)
+			if (keyCode == KeyCode::E)
 			{
 					m_Burst = true;
 				
@@ -289,7 +292,7 @@ namespace GameDev2D
 		}
 		else if(m_Charged)
 		{
-			m_Game->SpawnBullet(position, velocity , GameDev2D::ColorList::Red, BULLET_CHARGED_RADIUS_INC);
+			m_Game->SpawnBullet(position, velocity , GameDev2D::ColorList::LightBlue, BULLET_CHARGED_RADIUS_INC);
 
 		}
 		else

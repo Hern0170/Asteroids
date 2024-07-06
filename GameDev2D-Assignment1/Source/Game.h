@@ -2,7 +2,7 @@
 
 #include <GameDev2D.h>
 #include <vector>
-
+#include <iostream>
 
 #include "Player.h"
 #include "Asteroid.h"
@@ -77,12 +77,18 @@ namespace GameDev2D
 		float m_StartTimer;
 		bool m_StartToggle;
 
+
 		Audio m_SoundMenu;
 		Audio m_SoundStart;
 		Audio m_SoundGame;
-		Audio m_SoundBasic;
-		Audio m_SoundBurst;
-		Audio m_SoundCharged;
+		Audio m_SoundCollisionAsteroidA;
+		Audio m_SoundCollisionAsteroidB;
+		Audio m_SoundCollisionAsteroidC;
+		Audio m_SoundCollisionShield;
+		Audio m_SoundSpawnShield;
+		Audio m_SoundTakenShield;
+		//Audio m_SoundBurst;
+		//Audio m_SoundCharged;
 
 
 	};

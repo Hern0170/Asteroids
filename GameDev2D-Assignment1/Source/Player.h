@@ -77,5 +77,11 @@ namespace GameDev2D
 		float m_TimerChargedShoot;
 		int m_BurstFireCount;
 
+		Audio m_SoundBasicShoot;
+		Audio m_SoundBurstShoot;
+		Audio m_SoundChargedtShoot;
+		Audio m_SoundPlayerMove;
+
+
 	};
 }

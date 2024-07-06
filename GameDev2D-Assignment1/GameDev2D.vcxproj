@@ -183,12 +183,17 @@
   <ItemGroup>
     <Media Include="Assets\Audio\BaseShoot.wav" />
     <Media Include="Assets\Audio\BurstShoot.wav" />
+    <Media Include="Assets\Audio\ChargedShoot.wav" />
+    <Media Include="Assets\Audio\ChargedShoot_A.wav" />
+    <Media Include="Assets\Audio\ChargedShoot_B.wav" />
     <Media Include="Assets\Audio\Explosion_A.wav" />
     <Media Include="Assets\Audio\Explosion_B.wav" />
     <Media Include="Assets\Audio\Explosion_C.wav" />
     <Media Include="Assets\Audio\Fanfare.wav" />
     <Media Include="Assets\Audio\Loop.wav" />
     <Media Include="Assets\Audio\PlayerHit.wav" />
+    <Media Include="Assets\Audio\PlayerMove.wav" />
+    <Media Include="Assets\Audio\PlayerMove_A.wav" />
     <Media Include="Assets\Audio\ShieldCollision.wav" />
     <Media Include="Assets\Audio\ShieldSpawn.wav" />
     <Media Include="Assets\Audio\ShieldTaken.wav" />

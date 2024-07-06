@@ -24,7 +24,11 @@ namespace GameDev2D
 		m_Burst(false),
 		m_TimerShoot(0.0f),
 		m_Charged(false),
-		m_BurstFireCount(0)
+		m_BurstFireCount(0),
+		m_SoundBasicShoot("BaseShoot"),
+		m_SoundBurstShoot("BurstShoot"),
+		m_SoundChargedtShoot("ChargedShoot_A"),
+		m_SoundPlayerMove("PlayerMove_A")
 	{
 		// Define the player shape.
 
@@ -59,6 +63,10 @@ namespace GameDev2D
 		for (int i = 0; i < 3; i++) {
 			m_Radians[i] = i * 2 * M_PI / 3;
 		}
+
+
+		m_SoundPlayerMove.SetDoesLoop(true);
+		m_SoundPlayerMove.SetVolume(0.03f);
 	}
 
 
@@ -86,6 +94,7 @@ namespace GameDev2D
 					if (m_BurstFireCount >= BURST_FIRE_MAX) {
 						m_Burst = false;
 						m_BurstFireCount = 0;
+
 					}
 					
 		}
@@ -93,12 +102,9 @@ namespace GameDev2D
 		if (m_Charged) 
 		{
 			m_TimerShoot += delta;
-			//if (m_TimerShoot >= RAPID_FIRE_INTERVAL)
-			//{
 					Shoot();
 					m_TimerShoot = 0.0f;
 				
-			//}
 		}
 		
 
@@ -212,6 +218,8 @@ namespace GameDev2D
 			if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
 			{
 				m_Controls.y = 1;
+
+				m_SoundPlayerMove.Play();
 			}
 			else if (keyCode == KeyCode::Left || keyCode == KeyCode::A)
 			{
@@ -230,9 +238,11 @@ namespace GameDev2D
 			if (keyCode == KeyCode::Q)
 			{
 				m_Charged = false;
+				m_SoundChargedtShoot.Stop();
 			}
 			if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
 			{
+				m_SoundPlayerMove.Stop();
 				m_Controls.y = 0;
 			}
 			else if (keyCode == KeyCode::Left || keyCode == KeyCode::A)
@@ -278,6 +288,7 @@ namespace GameDev2D
 
 		if (!m_Charged) 
 		{
+			
 			velocity = direction * LASER_SPEED;
 
 		}
@@ -288,15 +299,18 @@ namespace GameDev2D
 		}
 		if (m_Burst) 
 		{
+			m_SoundBurstShoot.Play();
 			m_Game->SpawnBullet(position, velocity, BULLET_BURST_COLOR, BULLET_BURST_RADIUS_INC);
 		}
 		else if(m_Charged)
 		{
+			m_SoundChargedtShoot.Play();
 			m_Game->SpawnBullet(position, velocity , GameDev2D::ColorList::LightBlue, BULLET_CHARGED_RADIUS_INC);
 
 		}
 		else
 		{
+			m_SoundBasicShoot.Play();
 			m_Game->SpawnBullet(position, velocity, GameDev2D::Color::Random(), BULLET_RADIUS_INC);
 		}
 

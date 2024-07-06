@@ -1,27 +1,14 @@
-﻿  Game.cpp
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Game.cpp(30,2): error C2512: 'GameDev2D::Audio': no appropriate default constructor available
-  (compiling source file '/Source/Game.cpp')
-  C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Framework\Audio\Audio.h(11,8):
-  see declaration of 'GameDev2D::Audio'
-  
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Game.cpp(55,28): warning C4305: 'argument': truncation from 'double' to 'float'
-  (compiling source file '/Source/Game.cpp')
-  
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Game.cpp(55,24): warning C4305: 'argument': truncation from 'double' to 'float'
-  (compiling source file '/Source/Game.cpp')
-  
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Game.cpp(61,28): warning C4305: 'argument': truncation from 'double' to 'float'
-  (compiling source file '/Source/Game.cpp')
-  
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Game.cpp(61,24): warning C4305: 'argument': truncation from 'double' to 'float'
-  (compiling source file '/Source/Game.cpp')
-  
-  main.cpp
+﻿  Asteroid.cpp
+  Bullet.cpp
+  Game.cpp
   Player.cpp
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Player.cpp(60,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Player.cpp(64,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   (compiling source file '/Source/Player.cpp')
   
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Player.cpp(75,30): warning C4305: '-=': truncation from 'double' to 'float'
+C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Player.cpp(83,30): warning C4305: '-=': truncation from 'double' to 'float'
   (compiling source file '/Source/Player.cpp')
   
+  Shield.cpp
+  main.cpp
   Generating Code...
+  GameDev2D.vcxproj -> C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Builds\GameDev2D-GAM1544\Debug\GameDev2D-GAM1544.exe

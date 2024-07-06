@@ -22,7 +22,14 @@ namespace GameDev2D
 		m_Asteroids{},
 		m_SoundMenu("Loop"),
 		m_SoundStart("Start"),
-		m_SoundGame("Space")
+		m_SoundGame("Space"),
+		m_SoundCollisionAsteroidA("Explosion_A"),
+		m_SoundCollisionAsteroidB("Explosion_B"),
+		m_SoundCollisionAsteroidC("Explosion_C"),
+		m_SoundCollisionShield("ShieldCollision"),
+		m_SoundSpawnShield("ShieldSpawn"),
+		m_SoundTakenShield("ShieldTaken")
+
 
 	{
 		m_Player = new Player(this);
@@ -70,6 +77,8 @@ namespace GameDev2D
 		
 
 		m_SoundMenu.SetVolume(0.5f);
+		m_SoundMenu.DoesLoop();
+		m_SoundMenu.Play();
 	}
 
 	Game::~Game()
@@ -300,6 +309,7 @@ namespace GameDev2D
 
 			if (player->GetHealth() == 2)
 			{
+				m_SoundCollisionShield.Play();
 				asteroid.SetIsActiveFalse();
 				m_asteroidsCount--;
 				m_TextAsteroids.SetText("Asteroids: " + std::to_string(m_asteroidsCount));
@@ -322,8 +332,7 @@ namespace GameDev2D
 		if (player->GetHealth() == 1) {
 			shield->SetIsActiveFalse();
 			player->SetHealth(player->GetHealth() + 1);
-			//m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
-
+			m_SoundTakenShield.Play();
 		}
 		
 
@@ -331,6 +340,26 @@ namespace GameDev2D
 
 	void Game::Bullet_AsteroidCollision(Bullet* bullet, Asteroid& asteroid)
 	{
+		
+		int rand = Math::RandomInt(1, 3);
+		switch (rand)
+		{
+			case 1:
+			{
+				m_SoundCollisionAsteroidA.Play();
+				break;
+			}
+			case 2:
+			{
+				m_SoundCollisionAsteroidB.Play();
+				break;
+			}
+			case 3:
+			{
+				m_SoundCollisionAsteroidC.Play();
+				break;
+			}
+		}
 
 		asteroid.SetIsActiveFalse();
 		bullet->SetIsActiveFalse();
@@ -338,6 +367,7 @@ namespace GameDev2D
 		m_TextAsteroids.SetText("Asteroids: " + std::to_string(m_asteroidsCount));
 		if (Math::RandomInt(1, 7) == 7 && m_Player->GetHealth() <= 2)
 		{
+			m_SoundSpawnShield.Play();
 			SpawnShield(asteroid.GetPosition());
 
 		}
@@ -390,9 +420,9 @@ namespace GameDev2D
 				if (m_Intro)
 				{
 					m_SoundStart.Play();
-					m_SoundMenu.FadeOut(.3f);
+					m_SoundMenu.Stop();
 					m_SoundGame.SetVolume(0.3f);
-					m_SoundGame.FadeIn(0.4f);
+					m_SoundGame.Play();
 					m_Intro = false;
 					m_Playing = true;
 				}

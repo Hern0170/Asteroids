@@ -12,7 +12,7 @@ static const int PLAYER_HEALTH = 1; // HEALTH
 
 static const GameDev2D::Color PLAYER_COLOR = GameDev2D::ColorList::White;
 
-const int NUM_ASTEROIDS = 20;
+const int NUM_ASTEROIDS = 80;
 
 const float ASTEROID_MIN_SPEED = 20.0f; // Pixels per second. 
 const float ASTEROID_MAX_SPEED = 70.0f; // Pixels per second. 

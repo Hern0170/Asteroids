@@ -268,7 +268,7 @@ namespace GameDev2D
 
     void Game::RenderPlayingState(BatchRenderer& batchRenderer)
     {
-        batchRenderer.RenderSpriteFont(m_TextAsteroids);
+        //batchRenderer.RenderSpriteFont(m_TextAsteroids);
 
         for (int i = 0; i < BULLET_POOL_SIZE; i++)
         {

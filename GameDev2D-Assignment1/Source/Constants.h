@@ -33,7 +33,7 @@ const int BULLET_CHARGED_RADIUS_INC = 0;
 const int BURST_FIRE_MAX = 20;
 
 const int CHARGED_FIRE_MAX = 20;
-
+const int CHARGED_FIRE_DELAY = 100;
 
 
 const int BULLET_OUTLINE = 1;

@@ -60,12 +60,12 @@ namespace GameDev2D
 		m_Flame.push_back(Vector2(-16, -4));
 		m_Flame.push_back(Vector2(-8, -6));
 
-		
+		//Create shield circles
 		for (int i = 0; i < 3; i++) {
 			m_Radians[i] = i * 2 * M_PI / 3;
 		}
 
-
+		//Sound Manager
 		m_SoundPlayerMove.SetDoesLoop(true);
 		m_SoundPlayerMove.SetVolume(0.3f);
 		m_SoundBasicShoot.SetVolume(0.3f);
@@ -76,20 +76,24 @@ namespace GameDev2D
 
 	void Player::OnUpdate(float delta)
 	{
+		//Set a collision cooldown
 		if (m_TimeSinceLastHit < m_CollisionCooldown) {
 			m_TimeSinceLastHit += delta;  
 		}
+
+		//Add Shields
 		if (m_PlayerHealth > 1)
 		{
 			for (int i = 0; i < 3; i++) {
 				m_Radians[i] += Math::DegreesToRadians(m_AngularVelocity) * delta;
-				if (m_Radians[i] >= 2 * M_PI) {
-					m_Radians[i] -= 2 * M_PI;
+				if (m_Radians[i] >= 2 * static_cast<float>(M_PI)) {
+					m_Radians[i] -= 2 * static_cast<float>(M_PI);
 				}
 			}
 
 		}
 
+		//shooting type Burst
 		if (m_Burst)
 		{
 			if (m_Game->GetIsShooting())
@@ -108,6 +112,7 @@ namespace GameDev2D
 			
 		}
 
+		//Shooting type Charge/Dash
 		if (m_Charged) 
 		{
 
@@ -171,6 +176,7 @@ namespace GameDev2D
 		}
 
 
+		//Flame interval
 		if (m_Controls.y == 1)
 		{
 			m_FlameTimer += delta;
@@ -191,30 +197,41 @@ namespace GameDev2D
 
 	void Player::OnRender(BatchRenderer& batchRenderer)
 	{
+		//Render circles
 		if (m_PlayerHealth > 1) 
 		{
 			for (int i = 0; i < 3; i++) 
 			{
 				float x = m_Position.x + cos(m_Radians[i]) * m_OrbitRadius;
 				float y = m_Position.y + sin(m_Radians[i]) * m_OrbitRadius;
-				batchRenderer.RenderCircle(x, y, 2.0f, NULL, GameDev2D::ColorList::Green, 2.0f);  // Renderiza cada círculo
+				batchRenderer.RenderCircle(x, y, 2.0f, NULL, GameDev2D::ColorList::Green, 2.0f);
 			}
 			
 		}
+
+		//Flame Render
 		if (m_Controls.y == 1)
 		{
 			GameDev2D::Color flameColor = m_FlameColorToggle ? GameDev2D::ColorList::OrangeRed : GameDev2D::ColorList::Orange;
 			batchRenderer.RenderLineStrip(m_Flame, flameColor, 2, m_Position, m_Angle);
 		}
+
+		//Render Ship
 		batchRenderer.RenderLineStrip(m_Shape, PLAYER_COLOR, 2, m_Position, m_Angle);
-		if(m_Charged)
-		batchRenderer.RenderCircle(m_Position.x,m_Position.y, 14.0f, NULL, GameDev2D::ColorList::LightBlue, 3.0f);  // Renderiza cada círculo
+
+		//Render ChargeShield
+		if (m_Charged) 
+		{
+			batchRenderer.RenderCircle(m_Position.x, m_Position.y, 14.0f, NULL, GameDev2D::ColorList::LightBlue, 3.0f);
+
+		}
 
 		
 	}
 
 	void Player::OnKeyEvent(KeyCode keyCode, KeyState keyState)
 	{
+		//Keys if not main menu
 		if (m_Game->GetPlaying())
 		{
 
@@ -222,7 +239,11 @@ namespace GameDev2D
 			{
 				if (keyCode == KeyCode::Space)
 				{
-					if (!m_Burst) Shoot();
+					if (!m_Burst)
+					{
+						m_SoundBasicShoot.Play();
+						Shoot();
+					}
 
 				}
 				if (keyCode == KeyCode::E)
@@ -233,6 +254,7 @@ namespace GameDev2D
 
 				if (keyCode == KeyCode::Q)
 				{
+					m_SoundChargedShoot.Play();
 					m_Charged = true;
 
 				}
@@ -280,9 +302,10 @@ namespace GameDev2D
 	}
 	void Player::Shoot()
 	{
-
+		//Swap fire
 		m_FireLeft = !m_FireLeft;
 
+		//Shoot char
 		float angleRadians = Math::DegreesToRadians(m_Angle);
 		float angleOffset = 0.01f;
 		float magnitude = 8.0f;
@@ -290,7 +313,9 @@ namespace GameDev2D
 
 		Vector2 direction;
 		Vector2 position;
+		Vector2 velocity;
 
+		//Spawn from cannon
 		if (m_FireLeft)
 		{
 			direction = Vector2(cos(angleRadians - angleOffset), sin(angleRadians - angleOffset));
@@ -307,8 +332,9 @@ namespace GameDev2D
 			Vector2 rightEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + rightEdge;
 		}
-		Vector2 velocity;
 
+
+		//Basic Speed bullet
 		if (!m_Charged) 
 		{
 			
@@ -316,23 +342,21 @@ namespace GameDev2D
 
 		}
 		else {
-			velocity = direction * -100;
-
-
+			velocity = direction * -CHARGED_FIRE_DELAY;
 		}
+
+		//Shoots call
 		if (m_Burst) 
 		{
 			m_Game->SpawnBullet(position, velocity, BULLET_BURST_COLOR, BULLET_BURST_RADIUS_INC);
 		}
 		else if(m_Charged)
 		{
-			m_SoundChargedShoot.Play();
 			m_Game->SpawnBullet(position, velocity , GameDev2D::ColorList::LightBlue, BULLET_CHARGED_RADIUS_INC);
 
 		}
 		else
 		{
-			m_SoundBasicShoot.Play();
 			m_Game->SpawnBullet(position, velocity, GameDev2D::Color::Random(), BULLET_RADIUS_INC);
 		}
 
@@ -341,26 +365,32 @@ namespace GameDev2D
 	{
 		return m_Radius;
 	}
+
 	Vector2 Player::GetPosition() const
 	{
 		return m_Position;
 	}
+
 	int Player::GetHealth() const
 	{
 		return m_PlayerHealth;
 	}
+
 	void Player::SetHealth(int h)
 	{
 		m_PlayerHealth = h;
 	}
+
 	void Player::ResetCollisionTimer()
 	{
 		m_TimeSinceLastHit = 0;
 	}
+
 	bool Player::CanBeHit()
 	{
 		return m_TimeSinceLastHit >= m_CollisionCooldown;
 	}
+
 	void Player::ActivateShield()
 	{
 	}

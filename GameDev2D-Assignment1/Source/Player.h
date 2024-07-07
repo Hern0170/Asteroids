@@ -36,6 +36,8 @@ namespace GameDev2D
 
 		bool GetCharged();
 
+		void StopSoundPlayer();
+
 	private:
 
 		Game* m_Game;
@@ -72,6 +74,7 @@ namespace GameDev2D
 
 		bool m_Burst;
 		float m_TimerShoot;
+		bool m_BurstActive;
 
 		bool m_Charged;
 		float m_TimerChargedShoot;
@@ -79,7 +82,7 @@ namespace GameDev2D
 
 		Audio m_SoundBasicShoot;
 		Audio m_SoundBurstShoot;
-		Audio m_SoundChargedtShoot;
+		Audio m_SoundChargedShoot;
 		Audio m_SoundPlayerMove;
 
 

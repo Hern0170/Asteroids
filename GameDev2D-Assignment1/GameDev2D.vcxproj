@@ -199,6 +199,7 @@
     <Media Include="Assets\Audio\ShieldTaken.wav" />
     <Media Include="Assets\Audio\Space.wav" />
     <Media Include="Assets\Audio\Start.wav" />
+    <Media Include="Assets\Audio\Win.wav" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{5B4F3AE6-46CD-46D8-BB74-330F3B13576B}</ProjectGuid>

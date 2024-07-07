@@ -591,5 +591,8 @@
     <Media Include="Assets\Audio\PlayerMove_A.wav">
       <Filter>Assets</Filter>
     </Media>
+    <Media Include="Assets\Audio\Win.wav">
+      <Filter>Assets</Filter>
+    </Media>
   </ItemGroup>
 </Project>

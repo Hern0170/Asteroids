@@ -44,9 +44,10 @@ namespace GameDev2D
 
 		void Bullet_AsteroidCollision(Bullet* Bullet , Asteroid& asteroid);
 
-		
+		bool GetPlaying();
+		bool GetIsShooting();
 
-
+		void StopSound();
 		void End();
 
 
@@ -56,6 +57,8 @@ namespace GameDev2D
 
 		Player* m_Player;
 		std::vector<Asteroid> m_Asteroids;
+
+		bool m_IsShooting;
 
 		Shield* m_Shield[SHIELD_POOL_SIZE];
 		Bullet* m_Bullet[BULLET_POOL_SIZE];
@@ -87,8 +90,8 @@ namespace GameDev2D
 		Audio m_SoundCollisionShield;
 		Audio m_SoundSpawnShield;
 		Audio m_SoundTakenShield;
-		//Audio m_SoundBurst;
-		//Audio m_SoundCharged;
+		Audio m_SoundWin;
+
 
 
 	};

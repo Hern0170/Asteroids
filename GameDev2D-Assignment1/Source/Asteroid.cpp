@@ -98,6 +98,14 @@ namespace GameDev2D
 	{
 		return m_MaxRadius;
 	}
+
+	void Asteroid::SetMaxRadius(float radius)
+	{
+		m_MaxRadius = radius;
+	}
+
+
+
 	Vector2 Asteroid::GetPosition() const
 	{
 		return m_Position;

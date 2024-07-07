@@ -13,6 +13,7 @@ namespace GameDev2D
 		void OnRender(BatchRenderer& batchRenderer);
 
 		float GetMaxRadius() const;
+		void SetMaxRadius(float radius);
 		Vector2 GetPosition() const;
 
 		bool IsActive() const;

@@ -22,12 +22,13 @@ namespace GameDev2D
 		m_OrbitRadius(20.0f),
 		m_AngularVelocity(300.0f),
 		m_Burst(false),
+		m_BurstActive(false),
 		m_TimerShoot(0.0f),
 		m_Charged(false),
 		m_BurstFireCount(0),
 		m_SoundBasicShoot("BaseShoot"),
 		m_SoundBurstShoot("BurstShoot"),
-		m_SoundChargedtShoot("ChargedShoot_A"),
+		m_SoundChargedShoot("ChargedShoot_A"),
 		m_SoundPlayerMove("PlayerMove_A")
 	{
 		// Define the player shape.
@@ -66,7 +67,10 @@ namespace GameDev2D
 
 
 		m_SoundPlayerMove.SetDoesLoop(true);
-		m_SoundPlayerMove.SetVolume(0.03f);
+		m_SoundPlayerMove.SetVolume(0.3f);
+		m_SoundBasicShoot.SetVolume(0.3f);
+		m_SoundBurstShoot.SetVolume(0.3f);
+		m_SoundChargedShoot.SetVolume(0.3f);
 	}
 
 
@@ -88,22 +92,35 @@ namespace GameDev2D
 
 		if (m_Burst)
 		{
-					
+			if (m_Game->GetIsShooting())
+			{
+				m_SoundBurstShoot.Play();
+			}
 					m_BurstFireCount++;
 					Shoot();
-					if (m_BurstFireCount >= BURST_FIRE_MAX) {
-						m_Burst = false;
-						m_BurstFireCount = 0;
 
-					}
-					
+				if (m_BurstFireCount >= BURST_FIRE_MAX) {
+					m_Burst = false;
+					m_BurstFireCount = 0;
+					m_SoundBurstShoot.Stop();
+					m_BurstActive = true;
+				}
+			
 		}
 
 		if (m_Charged) 
 		{
-			m_TimerShoot += delta;
-					Shoot();
-					m_TimerShoot = 0.0f;
+
+			m_TimerChargedShoot++;
+			Shoot();
+			if (m_TimerChargedShoot >= CHARGED_FIRE_MAX) 
+			{
+				m_Charged = false;
+				m_TimerChargedShoot = 0.0f;
+			}
+				
+
+			
 				
 		}
 		
@@ -198,66 +215,72 @@ namespace GameDev2D
 
 	void Player::OnKeyEvent(KeyCode keyCode, KeyState keyState)
 	{
-		if (keyState == KeyState::Down)
+		if (m_Game->GetPlaying())
 		{
-			if (keyCode == KeyCode::Space)
-			{
-				if(!m_Burst) Shoot();	
 
-			}
-			if (keyCode == KeyCode::E)
+			if (keyState == KeyState::Down)
 			{
+				if (keyCode == KeyCode::Space)
+				{
+					if (!m_Burst) Shoot();
+
+				}
+				if (keyCode == KeyCode::E)
+				{
 					m_Burst = true;
-				
+
+				}
+
+				if (keyCode == KeyCode::Q)
+				{
+					m_Charged = true;
+
+				}
+				if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
+				{
+					m_SoundPlayerMove.Play();
+					m_Controls.y = 1;
+
+				}
+				else if (keyCode == KeyCode::Left || keyCode == KeyCode::A)
+				{
+					m_Controls.x = -1;
+				}
+				else if (keyCode == KeyCode::Right || keyCode == KeyCode::D)
+				{
+					m_Controls.x = 1;
+				}
 			}
 
-			if (keyCode == KeyCode::Q)
-			{
-				m_Charged = true;
-			}
-			if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
-			{
-				m_Controls.y = 1;
 
-				m_SoundPlayerMove.Play();
-			}
-			else if (keyCode == KeyCode::Left || keyCode == KeyCode::A)
-			{
-				m_Controls.x = -1;
-			}
-			else if (keyCode == KeyCode::Right || keyCode == KeyCode::D)
-			{
-				m_Controls.x = 1;
-			}
 
-		}
-		
+			if (keyState == KeyState::Up)
+			{
+				if (keyCode == KeyCode::Q)
+				{
+					m_Charged = false;
+					m_SoundChargedShoot.Stop();
+				}
+				if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
+				{
+					m_SoundPlayerMove.Stop();
+					m_Controls.y = 0;
+				}
+				else if (keyCode == KeyCode::Left || keyCode == KeyCode::A)
+				{
 
-		if (keyState == KeyState::Up)
-		{
-			if (keyCode == KeyCode::Q)
-			{
-				m_Charged = false;
-				m_SoundChargedtShoot.Stop();
-			}
-			if (keyCode == KeyCode::Up || keyCode == KeyCode::W)
-			{
-				m_SoundPlayerMove.Stop();
-				m_Controls.y = 0;
-			}
-			else if (keyCode == KeyCode::Left || keyCode == KeyCode::A)
-			{
-				
-				m_Controls.x = 0;
-			}
-			else if (keyCode == KeyCode::Right || keyCode == KeyCode::D)
-			{
-				m_Controls.x = 0;
+					m_Controls.x = 0;
+				}
+				else if (keyCode == KeyCode::Right || keyCode == KeyCode::D)
+				{
+					m_Controls.x = 0;
+				}
 			}
 		}
 	}
 	void Player::Shoot()
 	{
+
 		m_FireLeft = !m_FireLeft;
 
 		float angleRadians = Math::DegreesToRadians(m_Angle);
@@ -299,12 +322,11 @@ namespace GameDev2D
 		}
 		if (m_Burst) 
 		{
-			m_SoundBurstShoot.Play();
 			m_Game->SpawnBullet(position, velocity, BULLET_BURST_COLOR, BULLET_BURST_RADIUS_INC);
 		}
 		else if(m_Charged)
 		{
-			m_SoundChargedtShoot.Play();
+			m_SoundChargedShoot.Play();
 			m_Game->SpawnBullet(position, velocity , GameDev2D::ColorList::LightBlue, BULLET_CHARGED_RADIUS_INC);
 
 		}
@@ -352,5 +374,12 @@ namespace GameDev2D
 	bool Player::GetCharged()
 	{
 		return m_Charged;
+	}
+	void Player::StopSoundPlayer()
+	{
+		m_SoundBasicShoot.Stop();
+		m_SoundBurstShoot.Stop();
+		m_SoundChargedShoot.Stop();
+		m_SoundPlayerMove.Stop();
 	}
 }

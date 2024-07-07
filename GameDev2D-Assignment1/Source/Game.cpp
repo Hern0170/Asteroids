@@ -5,7 +5,7 @@
 namespace GameDev2D
 {
 	Game::Game() :
-		m_TextHealth("OpenSans-CondBold_72"),
+		//m_TextHealth("OpenSans-CondBold_72"),
 		m_TextAsteroids("OpenSans-CondBold_72"),
 		m_TextWin("OpenSans-CondBold_72"),
 		m_TextTime("OpenSans-CondBold_72"),
@@ -16,6 +16,7 @@ namespace GameDev2D
 		m_asteroidsCount(NUM_ASTEROIDS),
 		m_Player(nullptr),
 		m_Playing(false),
+		m_IsShooting(false),
 		m_Intro(true),
 		m_StartToggle(true),
 		m_StartTimer(0.0f),
@@ -28,8 +29,8 @@ namespace GameDev2D
 		m_SoundCollisionAsteroidC("Explosion_C"),
 		m_SoundCollisionShield("ShieldCollision"),
 		m_SoundSpawnShield("ShieldSpawn"),
-		m_SoundTakenShield("ShieldTaken")
-
+		m_SoundTakenShield("ShieldTaken"),
+		m_SoundWin("Win")
 
 	{
 		m_Player = new Player(this);
@@ -64,7 +65,7 @@ namespace GameDev2D
 		m_TextStart.SetColor(GameDev2D::ColorList::SlateGray);
 		m_TextStart.SetScale(0.6f, 0.6f);
 
-		m_TextHealth.SetText("Lives: " + std::to_string(m_Player->GetHealth()));
+		//m_TextHealth.SetText("Lives: " + std::to_string(m_Player->GetHealth()));
 
 		m_TextAsteroids.SetText("Asteroids: " + std::to_string(m_asteroidsCount));
 		m_TextAsteroids.SetPosition(10.0f, 100.0f);
@@ -79,6 +80,10 @@ namespace GameDev2D
 		m_SoundMenu.SetVolume(0.5f);
 		m_SoundMenu.DoesLoop();
 		m_SoundMenu.Play();
+
+		m_SoundGame.SetDoesLoop(true);
+
+		m_SoundWin.SetDoesLoop(false);
 	}
 
 	Game::~Game()
@@ -197,8 +202,11 @@ namespace GameDev2D
 		}
 		if (m_asteroidsCount == 0 )
 		{
-			m_Playing = false;
 			End();
+			m_Playing = false;
+
+			m_SoundGame.FadeOut(0.3f);
+			m_SoundGame.Stop();
 			batchRenderer.RenderSpriteFont(m_TextWin);
 			batchRenderer.RenderSpriteFont(m_TextTime);
 
@@ -241,7 +249,11 @@ namespace GameDev2D
 		Bullet* bullet = GetBulletFromPool();
 		if (bullet != nullptr)
 		{
+			m_IsShooting = true;
 			bullet->Activate(position, velocity);
+		}
+		else {
+			m_IsShooting = false;
 		}
 	}
 
@@ -250,7 +262,11 @@ namespace GameDev2D
 		Bullet* bullet = GetBulletFromPool();
 		if (bullet != nullptr)
 		{
+			m_IsShooting = true;
 			bullet->Activate(position, velocity, color, size);
+		}
+		else {
+			m_IsShooting = false;
 		}
 	}
 
@@ -321,7 +337,6 @@ namespace GameDev2D
 				player->SetHealth(1);
 			
 			}
-			//m_TextHealth.SetText("Lives: " + std::to_string(player->GetHealth()));
 			player->ResetCollisionTimer();
 		}
 		
@@ -340,44 +355,76 @@ namespace GameDev2D
 
 	void Game::Bullet_AsteroidCollision(Bullet* bullet, Asteroid& asteroid)
 	{
-		
-		int rand = Math::RandomInt(1, 3);
-		switch (rand)
-		{
-			case 1:
-			{
-				m_SoundCollisionAsteroidA.Play();
-				break;
-			}
-			case 2:
-			{
-				m_SoundCollisionAsteroidB.Play();
-				break;
-			}
-			case 3:
-			{
-				m_SoundCollisionAsteroidC.Play();
-				break;
-			}
-		}
 
-		asteroid.SetIsActiveFalse();
-		bullet->SetIsActiveFalse();
-		m_asteroidsCount--;
-		m_TextAsteroids.SetText("Asteroids: " + std::to_string(m_asteroidsCount));
-		if (Math::RandomInt(1, 7) == 7 && m_Player->GetHealth() <= 2)
-		{
-			m_SoundSpawnShield.Play();
-			SpawnShield(asteroid.GetPosition());
+			int rand = Math::RandomInt(1, 3);
+			switch (rand)
+			{
+				case 1:
+				{
+					m_SoundCollisionAsteroidA.Play();
+					break;
+				}
+				case 2:
+				{
+					m_SoundCollisionAsteroidB.Play();
+					break;
+				}
+				case 3:
+				{
+					m_SoundCollisionAsteroidC.Play();
+					break;
+				}
+			}
 
-		}
+			asteroid.SetIsActiveFalse();
+			bullet->SetIsActiveFalse();
+			m_asteroidsCount--;
+			m_TextAsteroids.SetText("Asteroids: " + std::to_string(m_asteroidsCount));
 
-		
+			if (Math::RandomInt(1, 7) == 7 && m_Player->GetHealth() <= 2)
+			{
+				m_SoundSpawnShield.Play();
+				SpawnShield(asteroid.GetPosition());
+
+			}
+	}
+
+	bool Game::GetPlaying()
+	{
+		return m_Playing;
+	}
+
+	bool Game::GetIsShooting()
+	{
+		return m_IsShooting;
+	}
+
+	void Game::StopSound()
+	{
+		m_SoundMenu.Stop();
+		m_SoundStart.Stop();
+		m_SoundGame.Stop();
+		m_SoundCollisionAsteroidA.Stop();
+		m_SoundCollisionAsteroidB.Stop();
+		m_SoundCollisionAsteroidC.Stop();
+		m_SoundCollisionShield.Stop();
+		m_SoundSpawnShield.Stop();
+		m_SoundTakenShield.Stop();
+		m_Player->StopSoundPlayer();
 	}
 
 	void Game::End()
 	{
-		int timeInSeconds = static_cast<int>(m_Timer);  // Convertir m_Timer a segundos enteros
+		if (m_Playing)
+		{
+			m_SoundWin.Play();
+			StopSound();
+			
+		}
+
+
+			
+		int timeInSeconds = static_cast<int>(m_Timer); 
 		m_TextTime.SetText("TIME: " + std::to_string(timeInSeconds) + " SECONDS");
 	}
 

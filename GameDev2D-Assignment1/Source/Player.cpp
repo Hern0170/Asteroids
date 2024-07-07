@@ -6,8 +6,8 @@ namespace GameDev2D
 {
 	Player::Player(Game* game) :
 		m_Game(game),
-		m_CollisionCooldown(2.0f),
-		m_TimeSinceLastHit(2.0f),
+		m_CollisionCooldown(PLAYER_COOLDOWN),
+		m_TimeSinceLastHit(PLAYER_COOLDOWN),
 		m_PlayerHealth(PLAYER_HEALTH),
 		m_Velocity(Vector2::Zero),
 		m_Position(Vector2(GetScreenWidth()* PLAYER_SPAWN_POSITION_X_PCT, GetScreenHeight()* PLAYER_SPAWN_POSITION_Y_PCT)),
@@ -75,10 +75,10 @@ namespace GameDev2D
 	void Player::InitializeSounds()
 	{
 		m_SoundPlayerMove.SetDoesLoop(true);
-		m_SoundPlayerMove.SetVolume(0.3f);
-		m_SoundBasicShoot.SetVolume(0.3f);
-		m_SoundBurstShoot.SetVolume(0.3f);
-		m_SoundChargedShoot.SetVolume(0.3f);
+		m_SoundPlayerMove.SetVolume(SOUND_VOLUME);
+		m_SoundBasicShoot.SetVolume(SOUND_VOLUME);
+		m_SoundBurstShoot.SetVolume(SOUND_VOLUME);
+		m_SoundChargedShoot.SetVolume(SOUND_VOLUME);
 	}
 
 	void Player::InitializeShields()
@@ -122,7 +122,7 @@ namespace GameDev2D
 
 	void Player::UpdateShieldOrbit(float delta)
 	{
-		if (m_PlayerHealth > 1) {
+		if (m_PlayerHealth > PLAYER_HEALTH) {
 			for (int i = 0; i < 3; i++) {
 				m_Radians[i] += Math::DegreesToRadians(m_AngularVelocity) * delta;
 				if (m_Radians[i] >= 2 * static_cast<float>(M_PI)) {
@@ -157,13 +157,21 @@ namespace GameDev2D
 
 	void Player::HandleChargedShooting(float delta)
 	{
-		if (m_Charged) {
-			m_TimerChargedShoot++;
-			Shoot();
-			if (m_TimerChargedShoot >= CHARGED_FIRE_MAX) {
-				m_Charged = false;
-				m_TimerChargedShoot = 0.0f;
+		if (m_Charged && m_TimerChargedShoot <= CHARGED_FIRE_MAX)
+		{
+			m_TimerChargedShoot ++;
+			if (m_TimerChargedShoot <= CHARGED_FIRE_MAX)
+			{
+				if (m_Game->GetIsShooting())
+				{
+					m_SoundChargedShoot.Play();
+				}
+				Shoot();
 			}
+		}
+		else 
+		{
+			m_Charged = false;
 		}
 	}
 
@@ -177,7 +185,7 @@ namespace GameDev2D
 		m_Position += m_Velocity * delta;
 
 		if (m_Velocity.Length() > PLAYER_MAX_SPEED) {
-			m_Velocity = m_Velocity.Normalized() * (m_Charged ? 400 : PLAYER_MAX_SPEED);
+			m_Velocity = m_Velocity.Normalized() * (m_Charged ? CHARGED_MAX_SPEED : PLAYER_MAX_SPEED);
 		}
 
 		WrapPosition();
@@ -235,46 +243,69 @@ namespace GameDev2D
 
 	void Player::OnKeyEvent(KeyCode keyCode, KeyState keyState)
 	{
-		if (m_Game->GetPlaying()) {
-			if (keyState == KeyState::Down) {
-				if (keyCode == KeyCode::Space) {
-					if (!m_Burst) {
+		if (m_Game->GetPlaying()) 
+		{
+			if (keyState == KeyState::Down) 
+			{
+				if (keyCode == KeyCode::Space) 
+				{
+					if (!m_Burst) 
+					{
 						m_SoundBasicShoot.Play();
 						Shoot();
 					}
 				}
-				if (keyCode == KeyCode::E) {
+				if (keyCode == KeyCode::E) 
+				{
 					m_Burst = true;
 				}
-				if (keyCode == KeyCode::Q) {
-					m_SoundChargedShoot.Play();
-					m_Charged = true;
+				if (keyCode == KeyCode::Q) 
+				{
+					if (m_TimerChargedShoot <= CHARGED_FIRE_MAX)
+					{
+						m_Charged = true;
+						m_TimerChargedShoot++;
+					}
+					else 
+					{
+						m_Charged = false;
+
+					}
 				}
-				if (keyCode == KeyCode::Up || keyCode == KeyCode::W) {
+				if (keyCode == KeyCode::Up || keyCode == KeyCode::W) 
+				{
 					m_SoundPlayerMove.Play();
 					m_Controls.y = 1;
 				}
-				else if (keyCode == KeyCode::Left || keyCode == KeyCode::A) {
+				else if (keyCode == KeyCode::Left || keyCode == KeyCode::A) 
+				{
 					m_Controls.x = -1;
 				}
-				else if (keyCode == KeyCode::Right || keyCode == KeyCode::D) {
+				else if (keyCode == KeyCode::Right || keyCode == KeyCode::D) 
+				{
 					m_Controls.x = 1;
 				}
 			}
 
-			if (keyState == KeyState::Up) {
-				if (keyCode == KeyCode::Q) {
+			if (keyState == KeyState::Up) 
+			{
+				if (keyCode == KeyCode::Q) 
+				{
 					m_Charged = false;
+					m_TimerChargedShoot = 0.0f;
 					m_SoundChargedShoot.Stop();
 				}
-				if (keyCode == KeyCode::Up || keyCode == KeyCode::W) {
+				if (keyCode == KeyCode::Up || keyCode == KeyCode::W) 
+				{
 					m_SoundPlayerMove.Stop();
 					m_Controls.y = 0;
 				}
-				else if (keyCode == KeyCode::Left || keyCode == KeyCode::A) {
+				else if (keyCode == KeyCode::Left || keyCode == KeyCode::A) 
+				{
 					m_Controls.x = 0;
 				}
-				else if (keyCode == KeyCode::Right || keyCode == KeyCode::D) {
+				else if (keyCode == KeyCode::Right || keyCode == KeyCode::D) 
+				{
 					m_Controls.x = 0;
 				}
 			}
@@ -292,33 +323,39 @@ namespace GameDev2D
 		Vector2 position;
 		Vector2 velocity;
 
-		if (m_FireLeft) {
+		if (m_FireLeft) 
+		{
 			direction = Vector2(cos(angleRadians - angleOffset), sin(angleRadians - angleOffset));
 			radians = static_cast<float>(angleRadians + M_PI_2);
 			Vector2 leftEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + leftEdge;
 		}
-		else {
+		else 
+		{
 			direction = Vector2(cos(angleRadians + angleOffset), sin(angleRadians + angleOffset));
 			radians = static_cast<float>(angleRadians - M_PI_2);
 			Vector2 rightEdge = Vector2(cos(radians), sin(radians)) * magnitude;
 			position = m_Position + rightEdge;
 		}
 
-		if (!m_Charged) {
+		if (!m_Charged) 
+		{
 			velocity = direction * LASER_SPEED;
 		}
 		else {
 			velocity = direction * -CHARGED_FIRE_DELAY;
 		}
 
-		if (m_Burst) {
+		if (m_Burst) 
+		{
 			m_Game->SpawnBullet(position, velocity, BULLET_BURST_COLOR, BULLET_BURST_RADIUS_INC);
 		}
-		else if (m_Charged) {
+		else if (m_Charged) 
+		{
 			m_Game->SpawnBullet(position, velocity, GameDev2D::ColorList::LightBlue, BULLET_CHARGED_RADIUS_INC);
 		}
-		else {
+		else 
+		{
 			m_Game->SpawnBullet(position, velocity, GameDev2D::Color::Random(), BULLET_RADIUS_INC);
 		}
 	}

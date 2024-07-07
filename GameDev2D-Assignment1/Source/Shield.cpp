@@ -65,7 +65,7 @@ namespace GameDev2D
     void Shield::OnRender(BatchRenderer& batchRenderer)
     {
         if (m_IsActive) {
-            batchRenderer.RenderLineStrip(m_Shape, PLAYER_COLOR, 2, m_Position, m_Angle);
+            batchRenderer.RenderLineStrip(m_Shape, PLAYER_COLOR, SHIELD_SIZE, m_Position, m_Angle);
         }
     }
 

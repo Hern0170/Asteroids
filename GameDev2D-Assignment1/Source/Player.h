@@ -134,6 +134,7 @@ namespace GameDev2D
         float m_TimerChargedShoot;
         int m_BurstFireCount;
 
+
         // Sound effects for various actions
         Audio m_SoundBasicShoot;
         Audio m_SoundBurstShoot;

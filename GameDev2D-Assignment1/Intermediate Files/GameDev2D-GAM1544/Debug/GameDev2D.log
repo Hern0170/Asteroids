@@ -2,13 +2,8 @@
   Bullet.cpp
   Game.cpp
   Player.cpp
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Player.cpp(55,32): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-  (compiling source file '/Source/Player.cpp')
-  
-C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Source\Player.cpp(70,30): warning C4305: '-=': truncation from 'double' to 'float'
-  (compiling source file '/Source/Player.cpp')
-  
   Shield.cpp
   main.cpp
   Generating Code...
+  LINK : C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Builds\GameDev2D-GAM1544\Debug\GameDev2D-GAM1544.exe not found or not built by the last incremental link; performing full link
   GameDev2D.vcxproj -> C:\Users\Alex\Documents\AC\S2\Grafic\A2\Asteroid\GameDev2D-Assignment1\Builds\GameDev2D-GAM1544\Debug\GameDev2D-GAM1544.exe

@@ -1,43 +1,58 @@
 #pragma once
-class Shield
-{
-};
 
 #include <GameDev2D.h>
 
 namespace GameDev2D
 {
-	class Shield
-	{
-	public:
-		Shield(const Vector2& position);
-		Shield();
+    // Shield class handles the functionalities related to the shield,
+    // including activation, updating, and rendering.
+    class Shield
+    {
+    public:
+        // Constructors for the Shield, one with a specified position and one with a default position.
+        Shield(const Vector2& position);
+        Shield();
 
-		void OnUpdate(float delta);
-		void OnRender(BatchRenderer& batchRenderer);
+        // Update the shield's state, including timing and position wrapping.
+        void OnUpdate(float delta);
 
-		float GetRadius() const;
-		Vector2 GetPosition() const;
+        // Render the shield graphics to the screen.
+        void OnRender(BatchRenderer& batchRenderer);
 
+        // Getter for the shield's collision radius.
+        float GetRadius() const;
 
-		bool IsActive() const;
-		void SetIsActiveFalse();
-		void SetIsActiveTrue();
+        // Getter for the shield's current position.
+        Vector2 GetPosition() const;
 
-		void Activate(const Vector2& position);
+        // Check if the shield is currently active.
+        bool IsActive() const;
 
+        // Set the shield's active state to false.
+        void SetIsActiveFalse();
 
-	private:
-		Vector2 m_Position;   
-		std::vector<Vector2> m_Shape;
-		float m_Angle;
-		bool m_IsActive;
+        // Set the shield's active state to true.
+        void SetIsActiveTrue();
 
-		float m_Radius;
-		float m_ShieldTimer;
+        // Activate the shield at a specific position.
+        void Activate(const Vector2& position);
 
-	};
-	
+    private:
+        // Initialize the shape of the shield.
+        void InitializeShape();
 
-	
+        // Update the shield's active timer.
+        void UpdateShieldTimer(float delta);
+
+        // Wrap the shield's position around the screen edges.
+        void WrapPosition();
+
+        Vector2 m_Position;   // The current position of the shield.
+        std::vector<Vector2> m_Shape;  // The graphical representation of the shield.
+        float m_Angle;   // The angle of the shield.
+        bool m_IsActive;   // Whether the shield is currently active.
+
+        float m_Radius;   // The collision radius of the shield.
+        float m_ShieldTimer;   // Timer tracking how long the shield has been active.
+    };
 }
